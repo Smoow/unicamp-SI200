@@ -12,7 +12,7 @@ int main() {
     while (i < 100)
     {
         codigos[i] = i;
-        estoque[i] = 50;
+        estoque[i] = 100;
         i++;
     }
 
@@ -21,12 +21,12 @@ int main() {
         printf("Inventario de mercadorias: \n");
         for (i = 0; i < 100; i+=2)
         {
-            printf("Codigo: %02d - Estoque: %d | Codigo: %02d - Estoque: %d", codigos[i], estoque[i], codigos[i+1], estoque[i]);
+            printf("Codigo: %02d - Estoque: %d | Codigo: %02d - Estoque: %d", codigos[i], estoque[i], codigos[i+1], estoque[i+1]);
             printf("\n");
         }
 
-        int choice_codigo;
-        int choice_qtd;
+        int choice_codigo = 0;
+        int choice_qtd = 0;
         printf("\n");
         printf("Cliente numero: %d\n", id);
         printf("Digite o codigo da mercadoria: ");
@@ -36,6 +36,7 @@ int main() {
         if (choice_codigo < 0 || choice_codigo > 99)
         {
             printf("\nNao temos uma mercadoria com esse codigo.\n");
+            printf("Comece novamente.\n");
             break;
         }
 
@@ -46,14 +47,15 @@ int main() {
         if (choice_qtd > estoque[choice_codigo])
         {
             printf("\nNao temos a mercadoria em estoque.\n");
+            printf("Comece novamente.\n");
             break;
         }
         
+        estoque[choice_codigo] -= choice_qtd;
 
         id += 1;
 
     }
-
 
     return 0;
 }

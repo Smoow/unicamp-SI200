@@ -30,7 +30,7 @@ int main() {
     int choice_sex = 0;
     int choice_id = 0;
 
-    // Construcao da consula
+    // Construcao da consulta
     printf("Para consultar a maior media de um aluno em algum curso\nEntre com:\n");
     printf(" Sexo (0 - Masculino) | (1 - Feminino): ");
     scanf("%d", &choice_sex);

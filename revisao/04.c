@@ -38,7 +38,7 @@ int main() {
     // Consulta da maior media correspondente ao sexo e curso informados
     for (i = 0; i < L; i++) {
         if (X[i][1] == choice_sex && X[i][2] == choice_id) {
-            for(j=0;j<L;j++) {
+            for(j = 0; j < L; j++) {
                 if (X[j][1] == choice_sex && X[j][2] == choice_id) {
                     if(X[j][3] > media_maior) {
                         media_maior = X[j][3];

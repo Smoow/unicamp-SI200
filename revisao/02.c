@@ -37,11 +37,8 @@ void imposto(float renda, int dependentes, float salmin) {
 
 int main() {
 
-    int cpf = 0;
-    int dependentes = 0;
-    int inputs = 1;
-    float renda = 0;
-    float salmin = 0;
+    int cpf = 0, dependentes = 0, inputs = 1;
+    float renda = 0, salmin = 0;
 
     while (inputs == 1) {
         printf("Digite o numero do CPF do contribuinte (APENAS NUMEROS): ");

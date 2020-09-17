@@ -8,8 +8,7 @@ int main() {
     printf("    3. Classificao\n");
 
     int choice = 0;
-    float salary = 0;
-    float percent = 0;
+    float salary = 0, percent = 0;
     printf("\nSua escolha: ");
     scanf("%d", &choice);
 

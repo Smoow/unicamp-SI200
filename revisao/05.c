@@ -3,8 +3,7 @@
 
 int main() {
 
-    int i = 0;
-    int x = 0;
+    int i = 0, x = 0, y = 0, z = 0;
 
     typedef struct
     {
@@ -54,7 +53,7 @@ int main() {
         scanf("%d", &choice);
 
         if (choice == 5) {
-            printf("Finalizado com sucesso!\n");
+            printf("Finalizado com sucesso!\n\n\n\n\n");
             sair = 1;
         }
 
@@ -68,32 +67,111 @@ int main() {
             printf("Digite a opcao desejada: ");
             scanf("%d", &choice_area);
 
-            switch (choice_area)
-            {
-            case 1:
-                if (x < 50) {
+            switch (choice_area) {
+                case 1:
+                    if (x < 50) {
 
-                    printf("Informe o codigo da obra: ");
-                    scanf("%d", &exatas[x].codigo);
-                    printf("Informe o nome da obra ( Separe os espacos com _ ): ");
-                    scanf("%s", &exatas[x].nome_obra);
-                    printf("Informe o autor da obra ( Separe os espacos com _ ): ");
-                    scanf("%s", &exatas[x].nome_autor);
-                    printf("Informe o numero de paginas da obra: ");
-                    scanf("%s", &exatas[x].paginas);
-                    printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
-                    scanf("%s", &exatas[x].editora);
-                    x++;
+                        printf("Informe o codigo da obra: ");
+                        scanf("%d", &exatas[x].codigo);
 
-                } 
-                else {
-                    printf("Voce nao pode cadastrar mais de 50 obras em uma area.");
-                }
+                        // Verificacao se existe o mesmo codigo na area
+                        for (i = 0; i < x; i++) {
+                            if (exatas[i].codigo == exatas[x].codigo) {
+                                printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
+                                printf("Comece de novo.\n\n");
+                                return 0;
+                            }
+                        }
 
-                break;
-            
-            default:
-                break;
+                        printf("Informe o nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &exatas[x].nome_obra);
+                        printf("Informe o autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &exatas[x].nome_autor);
+                        printf("Informe o numero de paginas da obra: ");
+                        scanf("%s", &exatas[x].paginas);
+                        printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &exatas[x].editora);
+                        x++;
+
+                        printf("\nCadastrado com sucesso!\n\n\n");
+
+                    } 
+                    else {
+                        printf("Voce nao pode cadastrar mais de 50 obras em uma area.");
+                    }
+
+                    break;
+
+                case 2:
+                    if (y < 50) {
+
+                        printf("Informe o codigo da obra: ");
+                        scanf("%d", &humanas[y].codigo);
+
+                        // Verificacao se existe o mesmo codigo na area
+                        for (i = 0; i < y; i++) {
+                            if (exatas[i].codigo == exatas[x].codigo) {
+                                printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
+                                printf("Comece de novo.\n\n");
+                                return 0;
+                            }
+                        }
+
+                        printf("Informe o nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &humanas[y].nome_obra);
+                        printf("Informe o autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &humanas[y].nome_autor);
+                        printf("Informe o numero de paginas da obra: ");
+                        scanf("%s", &humanas[y].paginas);
+                        printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &humanas[y].editora);
+                        y++;
+
+                        printf("\nCadastrado com sucesso!\n\n\n");
+
+                    } 
+                    else {
+                        printf("Voce nao pode cadastrar mais de 50 obras em uma area.");
+                    }
+
+                    break;
+
+                case 3:
+                    if (z < 50) {
+
+                        printf("Informe o codigo da obra: ");
+                        scanf("%d", &biomedicas[z].codigo);
+
+                        // Verificacao se existe o mesmo codigo na area
+                        for (i = 0; i < z; i++) {
+                            if (exatas[i].codigo == exatas[x].codigo) {
+                                printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
+                                printf("Comece de novo.\n\n");
+                                return 0;
+                            }
+                        }
+
+                        printf("Informe o nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &biomedicas[z].nome_obra);
+                        printf("Informe o autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &biomedicas[z].nome_autor);
+                        printf("Informe o numero de paginas da obra: ");
+                        scanf("%s", &biomedicas[z].paginas);
+                        printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", &biomedicas[z].editora);
+                        z++;
+
+                        printf("\nCadastrado com sucesso!\n\n\n");
+
+                    } 
+                    else {
+                        printf("Voce nao pode cadastrar mais de 50 obras em uma area.");
+                    }
+
+                    break;
+                
+                default:
+                    break;
             }
 
         }

@@ -87,7 +87,7 @@ int main() {
 
                 } 
                 else {
-                    printf("Voce nao pode cadastras mais de 50 obras em uma area.");
+                    printf("Voce nao pode cadastrar mais de 50 obras em uma area.");
                 }
 
                 break;

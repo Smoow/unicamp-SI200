@@ -3,10 +3,7 @@
 int main() {
 
     // Listar inventario
-    int id = 1;
-    int i = 0;
-    int codigos[100];
-    int estoque[100];
+    int id = 1, id = 0, codigos[100], estoque[100];
 
     // Preenchendo o inventario
     while (i < 100)

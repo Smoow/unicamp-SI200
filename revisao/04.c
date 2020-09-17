@@ -3,9 +3,7 @@
 int main() {
 
     // Variaveis auxiliares
-    int L = 0;
-    int i = 0;
-    int j = 0;
+    int L = 0, i = 0, j = 0;
 
     // Criacao da matriz
     printf("Entre com o numero de alunos que deseja cadastrar: ");
@@ -27,8 +25,8 @@ int main() {
     }
 
     // Variaveis auxiliares para a segunda parte do programa
-    int choice_sex = 0;
-    int choice_id = 0;
+    int choice_sex = 0, choice_id = 0;
+    float media_maior = 0, ra_maior = 0;
 
     // Construcao da consulta
     printf("Para consultar a maior media de um aluno em algum curso\nEntre com:\n");
@@ -40,15 +38,18 @@ int main() {
     // Consulta da maior media correspondente ao sexo e curso informados
     for (i = 0; i < L; i++) {
         if (X[i][1] == choice_sex && X[i][2] == choice_id) {
-            while (j < L) {
-                if (X[i][3] >= X[j][3]) {
-                    printf("\nMaior media corresponde a %.2f e pertence ao RA: %.0f\n", X[i][3], X[i][0]);
+            for(j=0;j<L;j++) {
+                if (X[j][1] == choice_sex && X[j][2] == choice_id) {
+                    if(X[j][3] > media_maior) {
+                        media_maior = X[j][3];
+                        ra_maior = X[j][0];
+                    }
                 }
-                    break;
             }
         }
     }
     
+    printf("A maior media eh %.2f e pertence ao RA %.0f\n", media_maior, ra_maior);
 
     return 0;
 }

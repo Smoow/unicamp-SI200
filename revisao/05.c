@@ -175,9 +175,7 @@ int main() {
         }
 
         if (choice == 2) {
-            int choice_area = 0;
-            int choice_code = 0;
-            int choice_valid = 0;
+            int choice_area = 0, choice_code = 0, choice_valid = 0;
 
             printf("1 - Exatas | 2 - Humanas | 3 - Biomedicas\n");
             printf("Escolha a area em que deseja consultar a obra: ");
@@ -265,9 +263,7 @@ int main() {
         }
 
         if (choice == 3) {
-            int choice_area = 0;
-            int choice_code = 0;
-            int valid = 0;
+            int choice_area = 0, choice_code = 0, valid = 0;
 
             printf("1 - Exatas | 2 - Humanas | 3 - Biomedicas\n");
             printf("Escolha a area em que deseja alterar a obra: ");
@@ -365,9 +361,7 @@ int main() {
         }
 
         if (choice == 4) {
-            int choice_area = 0;
-            int choice_code = 0;
-            int clear = 0;
+            int choice_area = 0, choice_code = 0, clear = 0;
 
             printf("1 - Exatas | 2 - Humanas | 3 - Biomedicas\n");
             printf("Escolha a area em que deseja excluir a obra: ");

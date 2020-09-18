@@ -55,11 +55,6 @@ int main() {
         printf("Digite a opcao desejada: ");
         scanf("%d", &choice);
 
-        if (choice == 5) {
-            printf("Finalizado com sucesso!\n\n");
-            sair = 1;
-        }
-
         if (choice == 1) {
             int choice_area = 0;
 
@@ -113,7 +108,7 @@ int main() {
 
                         // Verificacao se existe o mesmo codigo na area
                         for (i = 0; i < y; i++) {
-                            if (exatas[i].codigo == exatas[x].codigo) {
+                            if (exatas[i].codigo == exatas[y].codigo) {
                                 printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
                                 printf("Comece de novo.\n\n");
                                 return 0;
@@ -147,7 +142,7 @@ int main() {
 
                         // Verificacao se existe o mesmo codigo na area
                         for (i = 0; i < z; i++) {
-                            if (exatas[i].codigo == exatas[x].codigo) {
+                            if (biomedicas[i].codigo == biomedicas[z].codigo) {
                                 printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
                                 printf("Comece de novo.\n\n");
                                 return 0;
@@ -269,8 +264,106 @@ int main() {
 
         }
 
+        if (choice == 3) {
+            int choice_area = 0;
+            int choice_code = 0;
+            int valid = 0;
 
-        // BUG AQUI - Excluindo apenas na 1a vez
+            printf("1 - Exatas | 2 - Humanas | 3 - Biomedicas\n");
+            printf("Escolha a area em que deseja alterar a obra: ");
+            scanf("%d", &choice_area);
+
+            switch (choice_area)
+            {
+            case 1:
+                printf("Informe o codigo da obra: ");
+                scanf("%d", &choice_code);
+
+                for (i = 0; i < 50; i++) {
+                    if (choice_code == exatas[i].codigo && choice_code != 0) {
+                        printf("\n- Menu de Alteracao de Obras - \n");
+                        printf("Informe o novo nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", exatas[i].nome_obra);
+                        printf("Informe o novo autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", exatas[i].nome_autor);
+                        printf("Informe o novo numero de paginas da obra: ");
+                        scanf("%d", &exatas[i].paginas);
+                        printf("Informe o novo nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", exatas[i].editora);
+
+                        printf("\nAlteracao realizada com sucesso!\n");
+                        valid = 1;
+                    }
+
+                    if (valid == 0) {
+                        printf("\nNao temos essa obra cadastrada!\n\n");
+                        break;
+                    }
+
+                }
+                break;
+            
+            case 2:
+                printf("Informe o codigo da obra: ");
+                scanf("%d", &choice_code);
+
+                for (i = 0; i < 50; i++) {
+                    if (choice_code == humanas[i].codigo && choice_code != 0) {
+                        printf("\n- Menu de Alteracao de Obras - \n");
+                        printf("Informe o novo nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", humanas[i].nome_obra);
+                        printf("Informe o novo autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", humanas[i].nome_autor);
+                        printf("Informe o novo numero de paginas da obra: ");
+                        scanf("%d", &humanas[i].paginas);
+                        printf("Informe o novo nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", humanas[i].editora);
+
+                        printf("\nAlteracao realizada com sucesso!\n");
+                        valid = 1;
+                    }
+
+                    if (valid == 0) {
+                        printf("\nNao temos essa obra cadastrada!\n\n");
+                        break;
+                    }
+
+                }
+                break;
+
+            case 3:
+                printf("Informe o codigo da obra: ");
+                scanf("%d", &choice_code);
+
+                for (i = 0; i < 50; i++) {
+                    if (choice_code == biomedicas[i].codigo && choice_code != 0) {
+                        printf("\n- Menu de Alteracao de Obras - \n");
+                        printf("Informe o novo nome da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", biomedicas[i].nome_obra);
+                        printf("Informe o novo autor da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", biomedicas[i].nome_autor);
+                        printf("Informe o novo numero de paginas da obra: ");
+                        scanf("%d", &biomedicas[i].paginas);
+                        printf("Informe o novo nome da editora da obra ( Separe os espacos com _ ): ");
+                        scanf("%s", biomedicas[i].editora);
+
+                        printf("\nAlteracao realizada com sucesso!\n");
+                        valid = 1;
+                    }
+
+                    if (valid == 0) {
+                        printf("\nNao temos essa obra cadastrada!\n\n");
+                        break;
+                    }
+
+                }
+                break;
+
+            default:
+                break;
+            }
+        }
+
         if (choice == 4) {
             int choice_area = 0;
             int choice_code = 0;
@@ -280,20 +373,58 @@ int main() {
             printf("Escolha a area em que deseja excluir a obra: ");
             scanf("%d", &choice_area);
 
-            switch (choice_area)
-            {
+            switch (choice_area) {
             case 1:
                 
                 printf("Informe o codigo da obra: ");
                 scanf("%d", &choice_code);
-                i = 0;
+
                 for (i = 0; i < 50; i++) {
                     if (choice_code == exatas[i].codigo && choice_code != 0) {
                         exatas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
+                        clear = 1;
                     } 
-                    break;
                 }
+
+                if (clear == 0) {
+                    printf("\nObra inexistente.\n");
+                }
+
+                break;
+
+            case 2:
+                
+                printf("Informe o codigo da obra: ");
+                scanf("%d", &choice_code);
+
+                for (i = 0; i < 50; i++) {
+                    if (choice_code == humanas[i].codigo && choice_code != 0) {
+                        humanas[i].codigo = 0;
+                        printf("\nObra excluida com sucesso!\n\n");
+                        clear = 1;
+                    } 
+                }
+
+                if (clear == 0) {
+                    printf("\nObra inexistente.\n");
+                }
+
+                break;
+
+            case 3:
+                
+                printf("Informe o codigo da obra: ");
+                scanf("%d", &choice_code);
+
+                for (i = 0; i < 50; i++) {
+                    if (choice_code == biomedicas[i].codigo && choice_code != 0) {
+                        biomedicas[i].codigo = 0;
+                        printf("\nObra excluida com sucesso!\n\n");
+                        clear = 1;
+                    } 
+                }
+
                 if (clear == 0) {
                     printf("\nObra inexistente.\n");
                 }
@@ -305,21 +436,10 @@ int main() {
             }
         }
 
-        // if (choice == 6) {
-        //     for (i = 0; i < 50; i++) {
-        //         printf("ID: %d\n", i);
-        //         printf("EXATAS:\n");
-        //         printf("codigo = %d\n", exatas[i].codigo);
-        //         printf("paginas = %d\n", exatas[i].paginas);
-        //         printf("obra = %s\n", exatas[i].nome_obra);
-        //         printf("autor = %s\n", exatas[i].nome_autor);
-        //         printf("editora = %s\n\n", exatas[i].editora);
-
-        //     }
-        // }
-
-
-
+        if (choice == 5) {
+            printf("\nFinalizado com sucesso!\n\n");
+            sair = 1;
+        }
     }
     return 0;
 }

@@ -51,10 +51,10 @@ int main() {
         printf("    3. Alteracao das informacoes de uma obra\n");
         printf("    4. Excluir uma obra\n");
         printf("    5. Sair\n\n");
-        // printf("    6. Listar [DEV]\n\n");
         printf("Digite a opcao desejada: ");
         scanf("%d", &choice);
 
+        // Funcionalidade 'cadastrar obra'
         if (choice == 1) {
             int choice_area = 0;
 
@@ -174,6 +174,7 @@ int main() {
 
         }
 
+        // Funcionalidade 'consulta obra'
         if (choice == 2) {
             int choice_area = 0, choice_code = 0, choice_valid = 0;
 
@@ -262,6 +263,7 @@ int main() {
 
         }
 
+        // Funcionalidade 'alterar obra'
         if (choice == 3) {
             int choice_area = 0, choice_code = 0, valid = 0;
 
@@ -360,6 +362,7 @@ int main() {
             }
         }
 
+        // Funcionalidade 'excluir obra'
         if (choice == 4) {
             int choice_area = 0, choice_code = 0, clear = 0;
 
@@ -430,10 +433,12 @@ int main() {
             }
         }
 
+        // Funcionalidade 'sair'
         if (choice == 5) {
             printf("\nFinalizado com sucesso!\n\n");
             sair = 1;
         }
     }
+
     return 0;
 }

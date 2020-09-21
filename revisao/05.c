@@ -381,6 +381,7 @@ int main() {
                         exatas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
                         clear = 1;
+                        x--; // X = Contador de obras da area Exatas
                     } 
                 }
 
@@ -399,6 +400,7 @@ int main() {
                     if (choice_code == humanas[i].codigo && choice_code != 0) {
                         humanas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
+                        y--; // Y = Contador de obras da area Exatas
                         clear = 1;
                     } 
                 }
@@ -418,6 +420,7 @@ int main() {
                     if (choice_code == biomedicas[i].codigo && choice_code != 0) {
                         biomedicas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
+                        z--; // Z = Contador de obras da area Exatas
                         clear = 1;
                     } 
                 }

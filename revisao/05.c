@@ -47,8 +47,8 @@ int main() {
 
         printf("-- Menu principal --\n");
         printf("    1. Cadastrar obras\n");
-        printf("    2. Consulta as informacoes de uma obra\n");
-        printf("    3. Alteracao das informacoes de uma obra\n");
+        printf("    2. Consultar informacoes de uma obra\n");
+        printf("    3. Alterar informacoes de uma obra\n");
         printf("    4. Excluir uma obra\n");
         printf("    5. Sair\n\n");
         printf("Digite a opcao desejada: ");

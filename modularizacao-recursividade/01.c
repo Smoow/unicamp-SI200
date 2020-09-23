@@ -38,8 +38,6 @@ int somatorio(int num) {
 // Função b) soma de series
 float soma_series(int num) {
 
-    int S = 0.0;
-
     // Recursividade
     if (num == 1)
         return 1.0; // Condição de parada

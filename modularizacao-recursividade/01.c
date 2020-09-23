@@ -49,8 +49,6 @@ float soma_series(int num) {
 // Função c) soma de series fatorial
 float soma_series_fat(int num) {
 
-    int S = 0.0;
-
     // Recursividade
     if (num == 1)
         return 1.0; // Condição de parada

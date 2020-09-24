@@ -16,18 +16,25 @@ int main() {
     printf("\nSua escolha: ");
     scanf("%d", &choice);
 
-    if (choice == 1)
+    switch (choice)
+    {
+    case 1:
         imposto();
-    else {
-        if (choice == 2)
-            novo_salario();
-        else {
-            if (choice == 3)
-                classificacao();
-            else
-                printf("Opcao invalida!\n");
-        }
+        break;
+    
+    case 2:
+        novo_salario();
+        break;
+    
+    case 3:
+        classificacao();
+        break;
+    
+    default:
+        printf("Opcao invalida!\n");
+        break;
     }
+
 }
 
 void imposto() {

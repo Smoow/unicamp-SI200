@@ -58,8 +58,9 @@ float soma_series_fat(int num) {
 }
 
 // Funcao para calcular o fatorial de um número inteiro positivo
-int fat(int num)
-{
+int fat(int num) {
+
+	// Recursividade
     if (num == 0)
         return 1; // Condicao de parada
     else

@@ -32,7 +32,6 @@ int somatorio(int num) {
         return 0; // Condicao de parada
     else 
         return (num + somatorio(num - 1));
-
 }
 
 // Funcao b) soma de series
@@ -43,7 +42,6 @@ float soma_series(int num) {
         return 1.0; // Condicao de parada
     else
         return ( (1.0/num) + soma_series(num - 1.0) );
-    
 }
 
 // Funcao c) soma de series fatorial
@@ -54,7 +52,6 @@ float soma_series_fat(int num) {
         return 1.0; // Condicao de parada
     else
         return ( (1.0/fat(num)) + soma_series_fat(num - 1.0) );
-    
 }
 
 // Funcao para calcular o fatorial de um número inteiro positivo

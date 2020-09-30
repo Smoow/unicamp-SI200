@@ -4,7 +4,7 @@
 int main() {
     
     // Variaveis auxiliares comuns
-    int i = 0, j = 0, x = 0, y = 0, z = 0;
+    int i = 0, j = 0, n_exatas = 0, n_humanas = 0, n_biomedicas = 0;
 
     // Gerando a struct Livro
     typedef struct
@@ -67,14 +67,14 @@ int main() {
 
             switch (choice_area) {
                 case 1:
-                    if (x < 50) {
+                    if (n_exatas < 50) {
 
                         printf("Informe o codigo da obra: ");
-                        scanf("%d", &exatas[x].codigo);
+                        scanf("%d", &exatas[n_exatas].codigo);
 
                         // Verificacao se existe o mesmo codigo na area
-                        for (i = 0; i < x; i++) {
-                            if (exatas[i].codigo == exatas[x].codigo) {
+                        for (i = 0; i < n_exatas; i++) {
+                            if (exatas[i].codigo == exatas[n_exatas].codigo) {
                                 printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
                                 printf("Comece de novo.\n\n");
                                 return 0;
@@ -82,14 +82,14 @@ int main() {
                         }
 
                         printf("Informe o nome da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", exatas[x].nome_obra);
+                        scanf("%s", exatas[n_exatas].nome_obra);
                         printf("Informe o autor da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", exatas[x].nome_autor);
+                        scanf("%s", exatas[n_exatas].nome_autor);
                         printf("Informe o numero de paginas da obra: ");
-                        scanf("%d", &exatas[x].paginas);
+                        scanf("%d", &exatas[n_exatas].paginas);
                         printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", exatas[x].editora);
-                        x++;
+                        scanf("%s", exatas[n_exatas].editora);
+                        n_exatas++;
 
                         printf("\nCadastrado com sucesso!\n\n\n");
 
@@ -101,14 +101,14 @@ int main() {
                     break;
 
                 case 2:
-                    if (y < 50) {
+                    if (n_humanas < 50) {
 
                         printf("Informe o codigo da obra: ");
-                        scanf("%d", &humanas[y].codigo);
+                        scanf("%d", &humanas[n_humanas].codigo);
 
                         // Verificacao se existe o mesmo codigo na area
-                        for (i = 0; i < y; i++) {
-                            if (exatas[i].codigo == exatas[y].codigo) {
+                        for (i = 0; i < n_humanas; i++) {
+                            if (exatas[i].codigo == exatas[n_humanas].codigo) {
                                 printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
                                 printf("Comece de novo.\n\n");
                                 return 0;
@@ -116,14 +116,14 @@ int main() {
                         }
 
                         printf("Informe o nome da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", humanas[y].nome_obra);
+                        scanf("%s", humanas[n_humanas].nome_obra);
                         printf("Informe o autor da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", humanas[y].nome_autor);
+                        scanf("%s", humanas[n_humanas].nome_autor);
                         printf("Informe o numero de paginas da obra: ");
-                        scanf("%d", &humanas[y].paginas);
+                        scanf("%d", &humanas[n_humanas].paginas);
                         printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", humanas[y].editora);
-                        y++;
+                        scanf("%s", humanas[n_humanas].editora);
+                        n_humanas++;
 
                         printf("\nCadastrado com sucesso!\n\n\n");
 
@@ -135,14 +135,14 @@ int main() {
                     break;
 
                 case 3:
-                    if (z < 50) {
+                    if (n_biomedicas < 50) {
 
                         printf("Informe o codigo da obra: ");
-                        scanf("%d", &biomedicas[z].codigo);
+                        scanf("%d", &biomedicas[n_biomedicas].codigo);
 
                         // Verificacao se existe o mesmo codigo na area
-                        for (i = 0; i < z; i++) {
-                            if (biomedicas[i].codigo == biomedicas[z].codigo) {
+                        for (i = 0; i < n_biomedicas; i++) {
+                            if (biomedicas[i].codigo == biomedicas[n_biomedicas].codigo) {
                                 printf("\nVoce nao pode cadastrar duas obras com o mesmo codigo.\n");
                                 printf("Comece de novo.\n\n");
                                 return 0;
@@ -150,14 +150,14 @@ int main() {
                         }
 
                         printf("Informe o nome da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", biomedicas[z].nome_obra);
+                        scanf("%s", biomedicas[n_biomedicas].nome_obra);
                         printf("Informe o autor da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", biomedicas[z].nome_autor);
+                        scanf("%s", biomedicas[n_biomedicas].nome_autor);
                         printf("Informe o numero de paginas da obra: ");
-                        scanf("%d", &biomedicas[z].paginas);
+                        scanf("%d", &biomedicas[n_biomedicas].paginas);
                         printf("Informe o nome da editora da obra ( Separe os espacos com _ ): ");
-                        scanf("%s", biomedicas[z].editora);
-                        z++;
+                        scanf("%s", biomedicas[n_biomedicas].editora);
+                        n_biomedicas++;
 
                         printf("\nCadastrado com sucesso!\n\n\n");
 
@@ -382,7 +382,7 @@ int main() {
                         exatas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
                         clear = 1;
-                        x--; // X = Contador de obras da area Exatas
+                        n_exatas--; // n_exatas = Contador de obras da area Exatas
                     } 
                 }
 
@@ -401,7 +401,7 @@ int main() {
                     if (choice_code == humanas[i].codigo && choice_code != 0) {
                         humanas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
-                        y--; // Y = Contador de obras da area Exatas
+                        n_humanas--; // n_humanas = Contador de obras da area Exatas
                         clear = 1;
                     } 
                 }
@@ -421,7 +421,7 @@ int main() {
                     if (choice_code == biomedicas[i].codigo && choice_code != 0) {
                         biomedicas[i].codigo = 0;
                         printf("\nObra excluida com sucesso!\n\n");
-                        z--; // Z = Contador de obras da area Exatas
+                        n_biomedicas--; // n_biomedicas = Contador de obras da area Exatas
                         clear = 1;
                     } 
                 }

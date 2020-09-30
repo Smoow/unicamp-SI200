@@ -15,7 +15,7 @@ void imposto(float renda, int dependentes, float salmin) {
             printf("Voce deve pagar R$%.2f", 0.05 * renda * dependentes * aliq);
         } else 
         {
-            if (<= 5 * salmin)
+            if (renda <= 5 * salmin)
             {
                 aliq = 0.10;
                 printf("Voce deve pagar R$%.2f", 0.05 * renda * dependentes * aliq);

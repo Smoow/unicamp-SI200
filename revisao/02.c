@@ -9,19 +9,19 @@ void imposto(float renda, int dependentes, float salmin) {
         printf("Voce esta isento do imposto!");
     } else 
     {
-        if (renda > 2 * salmin && renda <= 3 * salmin)
+        if (renda <= 3 * salmin)
         {
             aliq = 0.05;
             printf("Voce deve pagar R$%.2f", 0.05 * renda * dependentes * aliq);
         } else 
         {
-            if (renda > 3 * salmin && renda <= 5 * salmin)
+            if (<= 5 * salmin)
             {
                 aliq = 0.10;
                 printf("Voce deve pagar R$%.2f", 0.05 * renda * dependentes * aliq);
             } else 
             {
-                if (renda > 5 * salmin && renda <= 7 * salmin) 
+                if (renda <= 7 * salmin) 
                 {
                     aliq = 0.15;
                     printf("Voce deve pagar R$%.2f", 0.05 * renda * dependentes * aliq);

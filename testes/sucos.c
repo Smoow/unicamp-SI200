@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+void clearsrc();
+
 int main() {
 
     typedef struct
@@ -10,10 +12,15 @@ int main() {
         char telefone[12];
         char id_insta[20];
     } Cliente;
-    
 
+    typedef struct
+    {
+        int codigo_produto;
+        char nome[30];
+        int quantidade;
+    } Produto;
+    
     int choice = 0, i;
-    Cliente cliente[50];
 
     while (choice !=5) {
 
@@ -26,32 +33,10 @@ int main() {
         printf("Sua escolha: ");
         scanf("%d", &choice);
 
-    switch (choice)
-    {
-    case 1:
-        for (i = 0; i < 50; i++) {
-            printf("Digite o nome do cliente: ");
-            scanf(" %[^\n]", cliente[i].nome); 
-            printf("Digite o CPF do cliente: ");
-            scanf("%s", cliente[i].cpf);
-            printf("Digite o telefone do cliente: ");
-            scanf("%s", cliente[i].telefone);
-            printf("Digite o instagram do cliente: ");
-            scanf(" %[^\n]", cliente[i].id_insta);
-            printf("\n\n\n\n\n\n");
-            printf("Informacoes registradas:\n");
-            printf("Nome = %s\n", cliente[i].nome);
-            printf("CPF = %s\n", cliente[i].cpf);
-            printf("Telefone = %s\n", cliente[i].telefone);
-            printf("Instagram = %s\n", cliente[i].id_insta);
-        }
-        break;
-    
-    default:
-        break;
-    }
-
-
-    }
     return 0;
 }
+
+void clearsrc() {
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+

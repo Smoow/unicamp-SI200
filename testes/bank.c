@@ -81,7 +81,7 @@ float remove_saldo(float balance) {
         printf("$ Saque realizado com sucesso!\n\n");
         return (balance - quantia);
     }
-    
+
 }
 
 void clearscr() {

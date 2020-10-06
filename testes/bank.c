@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// Testes para implementacao no projeto
+
 void ver_saldo(float balance);      // Ver saldo atual da balança
 float add_saldo(float balance);     // Adicionar saldo na balança
 float remove_saldo(float balance);  // Remover saldo da balança

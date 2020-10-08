@@ -32,14 +32,14 @@ void clearsrc();
     // Criacao do vetor de structs
     Cliente cliente[5];
     Produto produto[4];
-    Pedido order[5];
+    Pedido order[50];
 
 int main() {
 
     // Variaveis auxiliares
     float saldo_balanca = 0;
     int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
-    int codigo_valido = 0, codigo_produto_atual = 0;
+    int codigo_valido = 0, codigo_produto_atual = 0, codigo_remocao = 0;
     char carac[5];
 
 
@@ -60,7 +60,7 @@ int main() {
     } 
 
     // Inicializando o vetor de struct Pedido
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 50; i++) {
         order[i].codigo_produto = 0;
         order[i].quantidade = 0;
         strcpy(order[i].cpf, "NULL");
@@ -71,17 +71,17 @@ int main() {
     while (choice != 0) {
 
         // Menu Principal
-        clearsrc();
-        printf("++++++++++++++++++++++++++++++++++++++\n");
-        printf("+++ ESSA EH UMA VERSAO DE TESTES +++++\n");
-        printf("+++ CLIENTES MAXIMOS = 5 +++++++++++++\n");
-        printf("+++ VARIEDADE MAXIMA NO ESTOQUE = 4 ++\n");
-        printf("++++++++++++++++++++++++++++++++++++++\n\n");
+        printf("\n\n+++++++++++++++++++++++++++++++++++++++\n");
+        printf("+++ ESSA EH UMA VERSAO DE TESTES    +++\n");
+        printf("+++ CLIENTES MAXIMOS = 5            +++\n");
+        printf("+++ VARIEDADE MAXIMA NO ESTOQUE = 4 +++\n");
+        printf("+++ PEDIDOS MAXIMOS = 50            +++\n");
+        printf("+++++++++++++++++++++++++++++++++++++++\n\n");
         printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
-        printf("1. Registrar cliente\n");
-        printf("2. Realizar pedido\n");
-        printf("3. Alterar estoque\n");
-        printf("4. Exibir saldo da balanca\n");
+        printf("1. Registrar cliente        [FEITO]\n");
+        printf("2. Realizar pedido          [FEITO]\n");
+        printf("3. Alterar estoque          [Falta o case 2.]\n");
+        printf("4. Exibir saldo da balanca  [Feito]\n");
         printf("[DEV] 5. Exibir todos os clientes registrados\n");
         printf("0. Sair\n\n");
         printf("Sua escolha: ");
@@ -215,7 +215,7 @@ int main() {
             for (i = 0; i < 4; i++)
                 {   
                     // Para não mostrar os slots que ainda não foram preenchidos com algum produto
-                    if (produto[i].codigo_produto != 0) {
+                    if (produto[i].quantidade != 0) {
                         printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
                     }
                 }
@@ -255,11 +255,68 @@ int main() {
                 }
                 break;
 
+            // Alterar informacoes
+            case 2:
+                clearsrc();
+                printf("+++ Estoque disponivel +++\n\n\n");
+
+                // Print do estoque disponível [Limitado até 4 itens] - Apenas na versão do protótipo.
+                for (i = 0; i < 4; i++)
+                {
+                    // Para não mostrar os slots que ainda não foram preenchidos com algum produto
+                    if (produto[i].quantidade != 0) {
+                            printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
+                        }
+                }
+
+                break;
+
+            // Remover item
+            case 3:
+                codigo_valido = 0;
+                clearsrc();
+                printf("+++ Estoque disponivel +++\n\n");
+
+                // Print do estoque disponível [Limitado até 4 itens] - Apenas na versão do protótipo.
+                for (i = 0; i < 4; i++)
+                    {   
+                        // Para não mostrar os slots que ainda não foram preenchidos com algum produto
+                        if (produto[i].quantidade != 0) {
+                            printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
+                        }
+                    }
+
+                printf("Informe o codigo do item que deseja remover: ");
+                scanf("%d", &codigo_remocao);
+
+                // Procura do codigo informado no registro de produtos
+                for (codigo_produto_atual = 0; codigo_produto_atual < 4; codigo_produto_atual++) {
+                    if (codigo_remocao == produto[codigo_produto_atual].codigo_produto){
+                        codigo_valido = 1;
+                        break;
+                    }
+                }
+
+                // Fazer o produto removido receber codigo zero e quantidade zero
+                if (codigo_valido) {
+                    produto[codigo_produto_atual].codigo_produto = 0;
+                    produto[codigo_produto_atual].quantidade = 0;
+                    clearsrc();
+                    printf("+++ Produto removido com sucesso! +++\n");
+                    printf("Voce removeu: %s", produto[codigo_produto_atual].nome);
+                    quantidade_produto--;
+                } else {
+                    clearsrc();
+                    printf("+++ O codigo informado nao corresponde a nenhum produto!\n\n");
+                }
+                break;
+
             case 0:
                 clearsrc();
                 break;
             
             default:
+                printf("+++ Opcao invalida! +++");
                 break;
             }
 

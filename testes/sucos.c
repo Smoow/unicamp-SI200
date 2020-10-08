@@ -36,6 +36,13 @@ void clearsrc();
 
 int main() {
 
+    // Variaveis auxiliares
+    float saldo_balanca = 0;
+    int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
+    int codigo_valido = 0, codigo_produto_atual = 0;
+    char carac[5];
+
+
     // Inicializando o vetor de struct Cliente
     for (int i = 0; i < 5; i++) {
         strcpy(cliente[i].nome, "NULL");
@@ -60,10 +67,6 @@ int main() {
 
     } 
 
-    // Variaveis auxiliares
-    int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
-    int codigo_valido = 0;
-    char carac[5];
 
     while (choice != 0) {
 
@@ -129,9 +132,10 @@ int main() {
 
             // Foi uma verificação básica para apresentar o protótipo - Alterar depois conforme os codigos registrados.
 
-            for (i = 0; i < 4; i++) {
-                if (codigo_pedido == produto[i].codigo_produto) {
+            for (codigo_produto_atual = 0; codigo_produto_atual < 4; codigo_produto_atual++) {
+                if (codigo_pedido == produto[codigo_produto_atual].codigo_produto) {
                     codigo_valido = 1;
+                    break;
                 }
             }
 
@@ -160,10 +164,14 @@ int main() {
                 // FAZER AS VERIFICACOES A PARTIR DAQUI
 
                 printf("Informe a quantidade desejada: ");
-                scanf("%d", &order[i].quantidade);
+                scanf("%d", &order[pedido].quantidade);
                 clearsrc();
+
+                produto[codigo_produto_atual].quantidade -= order[pedido].quantidade;
                 printf("\n$ Alteracao no estoque");
-                printf("\n$ Alteracao no saldo da balanca\n");
+
+                // Alteração no saldo da balança
+                saldo_balanca += order[pedido].quantidade * produto[codigo_produto_atual].preco;
                 printf("+++ Pedido realizado com sucesso! +++\n\n");
                 break;
             }
@@ -230,7 +238,7 @@ int main() {
         case 4:
             clearsrc();
             printf("-------------------------------------\n");
-            printf("Saldo: R$00.00\n");
+            printf("Saldo: R$%.2f\n", saldo_balanca);
             printf("-------------------------------------\n\n");
             break;
 

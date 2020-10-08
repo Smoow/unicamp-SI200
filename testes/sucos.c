@@ -21,14 +21,20 @@ void clearsrc();
         float preco;
     } Produto;
 
-    // Criacao do vetor de structs - Cliente
-    Cliente cliente[5];
-    Produto produto [4];
+    // Definicao da struct order
+    typedef struct
+    {
+        int codigo_produto;
+        int quantidade;
+        char cpf[20];
+    } Pedido;
 
+    // Criacao do vetor de structs
+    Cliente cliente[5];
+    Produto produto[4];
+    Pedido order[5];
 
 int main() {
-
-    
 
     // Inicializando o vetor de struct Cliente
     for (int i = 0; i < 5; i++) {
@@ -46,8 +52,17 @@ int main() {
         produto[i].preco = 0.0;
     } 
 
+    // Inicializando o vetor de struct Pedido
+    for (int i = 0; i < 4; i++) {
+        order[i].codigo_produto = 0;
+        order[i].quantidade = 0;
+        strcpy(order[i].cpf, "NULL");
+
+    } 
+
     // Variaveis auxiliares
     int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
+    int codigo_valido = 0;
     char carac[5];
 
     while (choice != 0) {
@@ -113,11 +128,39 @@ int main() {
             scanf("%d", &codigo_pedido);
 
             // Foi uma verificação básica para apresentar o protótipo - Alterar depois conforme os codigos registrados.
-            if (codigo_pedido == 12 || codigo_pedido == 13 || codigo_pedido == 21 || codigo_pedido == 22) {
-                printf("Informe a quantidade desejada: ");
-                scanf("%s", carac);
+
+            for (i = 0; i < 4; i++) {
+                if (codigo_pedido == produto[i].codigo_produto) {
+                    codigo_valido = 1;
+                }
+            }
+
+            if (codigo_valido) {
                 printf("Informe o CPF: ");
-                scanf("%s", carac);
+                gets(order[i].cpf);
+                gets(order[i].cpf);
+                
+                // Verificando se há alguém com o CPF registrado
+                int valido_cpf = 0;
+                for (int j = 0; j < 5; j++) {
+                    if (strcmp(order[i].cpf, cliente[j].cpf) == 0) {
+                        valido_cpf = 1;
+                        break;
+                    } else {
+                        clearsrc();
+                        printf("+++ Nao existe esse CPF cadastrado em nosso sistema. +++\n\n");
+                        break;
+                    }
+                }
+
+                // Caso não tenha encontrado alguém com o CPF - Volta para o menu principal
+                if (valido_cpf == 0)
+                    break;
+
+                // FAZER AS VERIFICACOES A PARTIR DAQUI
+
+                printf("Informe a quantidade desejada: ");
+                scanf("%d", &order[i].quantidade);
                 clearsrc();
                 printf("\n$ Alteracao no estoque");
                 printf("\n$ Alteracao no saldo da balanca\n");

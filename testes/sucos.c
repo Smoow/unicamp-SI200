@@ -18,10 +18,12 @@ void clearsrc();
         int codigo_produto;
         char nome[30];
         int quantidade;
+        float preco;
     } Produto;
 
     // Criacao do vetor de structs - Cliente
     Cliente cliente[5];
+    Produto produto [4];
 
 
 int main() {
@@ -36,12 +38,21 @@ int main() {
         strcpy(cliente[i].id_insta, "NULL");
     }   
 
+    // Inicializando o vetor de struct Produto
+    for (int i = 0; i < 4; i++) {
+        produto[i].codigo_produto = 0;
+        strcpy(produto[i].nome, "NULL");
+        produto[i].quantidade = 0;
+        produto[i].preco = 0.0;
+    } 
+
     // Variaveis auxiliares
-    int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0;
+    int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
     char carac[5];
 
     while (choice != 0) {
 
+        // Menu Principal
         printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
         printf("1. Registrar cliente\n");
         printf("2. Realizar pedido\n");
@@ -56,8 +67,16 @@ int main() {
         switch (choice)
         {
         case 1:
+
+            // Limite para registrar até 5 clientes - Apenas na versão de protótipo
+            if (id_client > 4) {
+                clearsrc();
+                printf("+++ Voce nao pode registrar mais que 5 clientes +++\n\n");
+                break;
+            }
+
+            // Registro de clientes
             clearsrc();
-            fflush(stdin);
             printf("+++ Registrar Cliente +++\n\n");
             printf("Informe o nome: ");
             gets(cliente[id_client].nome);
@@ -71,7 +90,6 @@ int main() {
 
             clearsrc();
             printf("+++ Cliente registrado com sucesso! +++\n\n");
-            printf("Voce registrou o nome: %s", cliente[id_client].nome);
             id_client++;
             break;
         
@@ -79,13 +97,22 @@ int main() {
             pedido++;
             clearsrc();
             printf("+++ Estoque disponivel +++\n\n\n");
-            printf("Suco de laranja   (1L)  - #12 | Quantidade: 25 | Preco: R$10\n");
-            printf("Suco de laranja   (2L)  - #13 | Quantidade: 20 | Preco: R$15\n");
-            printf("Suco de maracuja  (1L)  - #21 | Quantidade: 25 | Preco: R$10\n");
-            printf("Suco de maracuja  (2L)  - #22 | Quantidade: 20 | Preco: R$15\n\n");
+
+            // Print do estoque disponível [Limitado até 4 itens] - Apenas na versão do protótipo.
+            for (i = 0; i < 4; i++)
+            {
+                // Para não mostrar os slots que ainda não foram preenchidos com algum produto
+                if (produto[i].codigo_produto != 0) {
+                        printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
+                    }
+            }
+            
+            printf("\n");
             printf("Pedido numero #%d\n", pedido);
             printf("Informe o codigo do produto: #");
             scanf("%d", &codigo_pedido);
+
+            // Foi uma verificação básica para apresentar o protótipo - Alterar depois conforme os codigos registrados.
             if (codigo_pedido == 12 || codigo_pedido == 13 || codigo_pedido == 21 || codigo_pedido == 22) {
                 printf("Informe a quantidade desejada: ");
                 scanf("%s", carac);
@@ -106,11 +133,18 @@ int main() {
 
         case 3:
             clearsrc();
-            printf("+++ Estoque disponivel +++\n\n\n");
-            printf("Suco de laranja   (1L)    - #12 | Quantidade: 25\n");
-            printf("Suco de laranja   (2L)    - #13 | Quantidade: 20\n");
-            printf("Suco de maracuja  (1L)    - #21 | Quantidade: 25\n");
-            printf("Suco de maracuja  (2L)    - #22 | Quantidade: 20\n\n");
+            printf("+++ Estoque disponivel +++\n\n");
+
+            // Print do estoque disponível [Limitado até 4 itens] - Apenas na versão do protótipo.
+            for (i = 0; i < 4; i++)
+                {   
+                    // Para não mostrar os slots que ainda não foram preenchidos com algum produto
+                    if (produto[i].codigo_produto != 0) {
+                        printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
+                    }
+                }
+
+            printf("\n\n");
             printf("1. Adicionar item\n");
             printf("2. Alterar informacoes\n");
             printf("3. Remover item\n");
@@ -121,18 +155,23 @@ int main() {
             switch (choice_2)
             {
             case 1:
-                clearsrc();
-                printf("+++ Adicionar item +++\n\n");
-                printf("Informe o codigo do produto: #");
-                scanf("%s", carac);
-                printf("Informe o nome do produto: ");
-                scanf("%s", carac);
-                printf("Informe a quantidade disponivel do produto: ");
-                scanf("%s", carac);
-                printf("Informe o preco do produto: ");
-                scanf("%s", carac);
-                clearsrc();
-                printf("+++ Cadastro realizado com sucesso! +++\n\n");
+                // Limite para a quantidade da variedade de produtos no estoque - Apenas na versão protótipo.
+                if (quantidade_produto < 4) {
+                    clearsrc();
+                    printf("+++ Adicionar item +++\n\n");
+                    printf("Informe o codigo do produto: #");
+                    scanf("%d", &produto[quantidade_produto].codigo_produto);
+                    printf("Informe o nome do produto: ");
+                    gets(produto[quantidade_produto].nome);
+                    gets(produto[quantidade_produto].nome);
+                    printf("Informe a quantidade disponivel do produto: ");
+                    scanf("%d", &produto[quantidade_produto].quantidade);
+                    printf("Informe o preco do produto: ");
+                    scanf("%f", &produto[quantidade_produto].preco);
+                    clearsrc();
+                    printf("+++ Cadastro realizado com sucesso! +++\n\n");
+                    quantidade_produto++;
+                }
                 break;
 
             case 0:
@@ -152,6 +191,7 @@ int main() {
             printf("-------------------------------------\n\n");
             break;
 
+        // Case [DEV] para listagens dos produtos registrados -- Retirar depois
         case 5:
             clearsrc();
             for (i = 0; i < 5; i++)
@@ -164,12 +204,13 @@ int main() {
             
             break;
 
+        // Finalizar o programa
         case 0:
             clearsrc();
             printf("+++ Finalizado com sucesso! +++\n\n");
             break;
 
-
+        // Tratamento de entradas inesperadas
         default:
             clearsrc();
             printf("+++ Opcao invalida! +++\n\n");

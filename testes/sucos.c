@@ -71,12 +71,18 @@ int main() {
     while (choice != 0) {
 
         // Menu Principal
+        clearsrc();
+        printf("++++++++++++++++++++++++++++++++++++++\n");
+        printf("+++ ESSA EH UMA VERSAO DE TESTES +++++\n");
+        printf("+++ CLIENTES MAXIMOS = 5 +++++++++++++\n");
+        printf("+++ VARIEDADE MAXIMA NO ESTOQUE = 4 ++\n");
+        printf("++++++++++++++++++++++++++++++++++++++\n\n");
         printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
         printf("1. Registrar cliente\n");
         printf("2. Realizar pedido\n");
         printf("3. Alterar estoque\n");
         printf("4. Exibir saldo da balanca\n");
-        printf("$ DEV - 5. Exibir todos os clientes registrados\n");
+        printf("[DEV] 5. Exibir todos os clientes registrados\n");
         printf("0. Sair\n\n");
         printf("Sua escolha: ");
         scanf("%d", &choice);
@@ -84,6 +90,8 @@ int main() {
 
         switch (choice)
         {
+        
+        // Registrar cliente
         case 1:
 
             // Limite para registrar até 5 clientes - Apenas na versão de protótipo
@@ -111,7 +119,9 @@ int main() {
             id_client++;
             break;
         
+        // Realizar pedido
         case 2:
+            codigo_valido = 0;
             pedido++;
             clearsrc();
             printf("+++ Estoque disponivel +++\n\n\n");
@@ -120,7 +130,7 @@ int main() {
             for (i = 0; i < 4; i++)
             {
                 // Para não mostrar os slots que ainda não foram preenchidos com algum produto
-                if (produto[i].codigo_produto != 0) {
+                if (produto[i].quantidade != 0) {
                         printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
                     }
             }
@@ -130,12 +140,14 @@ int main() {
             printf("Informe o codigo do produto: #");
             scanf("%d", &codigo_pedido);
 
-            // Foi uma verificação básica para apresentar o protótipo - Alterar depois conforme os codigos registrados.
-
+            // Procurar se o código informado pertence à alguma mercadoria
             for (codigo_produto_atual = 0; codigo_produto_atual < 4; codigo_produto_atual++) {
                 if (codigo_pedido == produto[codigo_produto_atual].codigo_produto) {
-                    codigo_valido = 1;
-                    break;
+                    // Verificar se o código que representa essa mercadoria tem quantidade > 0 no estoque
+                    if (produto[codigo_produto_atual].quantidade > 0) {
+                        codigo_valido = 1;
+                        break;
+                    }
                 }
             }
 
@@ -153,22 +165,34 @@ int main() {
                     } else {
                         clearsrc();
                         printf("+++ Nao existe esse CPF cadastrado em nosso sistema. +++\n\n");
+                        pedido--;
                         break;
                     }
                 }
 
                 // Caso não tenha encontrado alguém com o CPF - Volta para o menu principal
-                if (valido_cpf == 0)
+                if (valido_cpf == 0) {
+                    pedido--;
                     break;
+                }
 
                 // FAZER AS VERIFICACOES A PARTIR DAQUI
 
                 printf("Informe a quantidade desejada: ");
                 scanf("%d", &order[pedido].quantidade);
+
+                // Verificação de estoque
+                if (order[pedido].quantidade > produto[codigo_produto_atual].quantidade) {
+                    clearsrc();
+                    printf("+++ Nao temos essa quantidade em estoque +++\n\n");
+                    pedido--;
+                    break;
+                }
+
                 clearsrc();
 
+                // Alteração na quantidade do estoque
                 produto[codigo_produto_atual].quantidade -= order[pedido].quantidade;
-                printf("\n$ Alteracao no estoque");
 
                 // Alteração no saldo da balança
                 saldo_balanca += order[pedido].quantidade * produto[codigo_produto_atual].preco;
@@ -182,6 +206,7 @@ int main() {
                 break;
             }
 
+        // Alterar estoque
         case 3:
             clearsrc();
             printf("+++ Estoque disponivel +++\n\n");
@@ -205,6 +230,8 @@ int main() {
 
             switch (choice_2)
             {
+            
+            // Adicionar um item no estoque
             case 1:
                 // Limite para a quantidade da variedade de produtos no estoque - Apenas na versão protótipo.
                 if (quantidade_produto < 4) {
@@ -222,6 +249,9 @@ int main() {
                     clearsrc();
                     printf("+++ Cadastro realizado com sucesso! +++\n\n");
                     quantidade_produto++;
+                } else {
+                    clearsrc();
+                    printf("+++ Atingimos o limite maximo do nosso estoque! +++\n\n");
                 }
                 break;
 
@@ -235,6 +265,7 @@ int main() {
 
             break;
 
+        // Exibição da balança
         case 4:
             clearsrc();
             printf("-------------------------------------\n");

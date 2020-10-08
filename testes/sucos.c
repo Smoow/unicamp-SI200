@@ -3,24 +3,41 @@
 
 void clearsrc();
 
-int main() {
-
+    // Definicao da struct Cliente
     typedef struct
     {
         char nome[40];
-        char cpf[14];
-        char telefone[12];
+        char cpf[20];
+        char telefone[20];
         char id_insta[20];
     } Cliente;
 
+    // Definicao da struct Produto
     typedef struct
     {
         int codigo_produto;
         char nome[30];
         int quantidade;
     } Produto;
+
+    // Criacao do vetor de structs - Cliente
+    Cliente cliente[5];
+
+
+int main() {
+
     
-    int choice = 5, choice_2 = 0, i, pedido = 0, codigo_pedido = 0;
+
+    // Inicializando o vetor de struct Cliente
+    for (int i = 0; i < 5; i++) {
+        strcpy(cliente[i].nome, "NULL");
+        strcpy(cliente[i].cpf, "NULL");
+        strcpy(cliente[i].telefone, "NULL");
+        strcpy(cliente[i].id_insta, "NULL");
+    }   
+
+    // Variaveis auxiliares
+    int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0;
     char carac[5];
 
     while (choice != 0) {
@@ -30,26 +47,32 @@ int main() {
         printf("2. Realizar pedido\n");
         printf("3. Alterar estoque\n");
         printf("4. Exibir saldo da balanca\n");
+        printf("$ DEV - 5. Exibir todos os clientes registrados\n");
         printf("0. Sair\n\n");
         printf("Sua escolha: ");
         scanf("%d", &choice);
+
 
         switch (choice)
         {
         case 1:
             clearsrc();
+            fflush(stdin);
             printf("+++ Registrar Cliente +++\n\n");
             printf("Informe o nome: ");
-            scanf("%s", carac);
+            gets(cliente[id_client].nome);
+            gets(cliente[id_client].nome);
             printf("Informe o CPF: ");
-            scanf("%s", carac);
+            scanf("%s", cliente[id_client].cpf);
             printf("Informe o telefone: ");
-            scanf("%s", carac);
+            scanf("%s", cliente[id_client].telefone);
             printf("Informe o instagram: @");
-            scanf("%s", carac);
+            scanf("%s", cliente[id_client].id_insta);
 
             clearsrc();
             printf("+++ Cliente registrado com sucesso! +++\n\n");
+            printf("Voce registrou o nome: %s", cliente[id_client].nome);
+            id_client++;
             break;
         
         case 2:
@@ -129,10 +152,23 @@ int main() {
             printf("-------------------------------------\n\n");
             break;
 
+        case 5:
+            clearsrc();
+            for (i = 0; i < 5; i++)
+            {
+                printf("Nome #%d      - %s\n", i, cliente[i].nome);
+                printf("CPF #%d       - %s\n", i, cliente[i].cpf);
+                printf("telefone #%d  - %s\n", i, cliente[i].telefone);
+                printf("instagram #%d - %s\n\n\n", i, cliente[i].id_insta);
+            }
+            
+            break;
+
         case 0:
             clearsrc();
             printf("+++ Finalizado com sucesso! +++\n\n");
             break;
+
 
         default:
             clearsrc();
@@ -148,4 +184,3 @@ int main() {
 void clearsrc() {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
-

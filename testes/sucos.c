@@ -16,7 +16,7 @@ void clearsrc();
     typedef struct
     {
         int codigo_produto;
-        char nome[30];
+        char nome[40];
         int quantidade;
         float preco;
     } Produto;
@@ -39,12 +39,10 @@ int main() {
     // Variaveis auxiliares
     float saldo_balanca = 0;
     int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
-    int codigo_valido = 0, codigo_produto_atual = 0, codigo_remocao = 0;
-    char carac[5];
-
+    int codigo_valido = 0, codigo_produto_atual = 0, codigo_remocao = 0, codigo_alteracao = 0;
 
     // Inicializando o vetor de struct Cliente
-    for (int i = 0; i < 5; i++) {
+    for (i = 0; i < 5; i++) {
         strcpy(cliente[i].nome, "NULL");
         strcpy(cliente[i].cpf, "NULL");
         strcpy(cliente[i].telefone, "NULL");
@@ -52,7 +50,7 @@ int main() {
     }   
 
     // Inicializando o vetor de struct Produto
-    for (int i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         produto[i].codigo_produto = 0;
         strcpy(produto[i].nome, "NULL");
         produto[i].quantidade = 0;
@@ -60,7 +58,7 @@ int main() {
     } 
 
     // Inicializando o vetor de struct Pedido
-    for (int i = 0; i < 50; i++) {
+    for (i = 0; i < 50; i++) {
         order[i].codigo_produto = 0;
         order[i].quantidade = 0;
         strcpy(order[i].cpf, "NULL");
@@ -80,8 +78,8 @@ int main() {
         printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
         printf("1. Registrar cliente        [FEITO]\n");
         printf("2. Realizar pedido          [FEITO]\n");
-        printf("3. Alterar estoque          [Falta o case 2.]\n");
-        printf("4. Exibir saldo da balanca  [Feito]\n");
+        printf("3. Alterar estoque          [FEITO]\n");
+        printf("4. Exibir saldo da balanca  [FEITO]\n");
         printf("[DEV] 5. Exibir todos os clientes registrados\n");
         printf("0. Sair\n\n");
         printf("Sua escolha: ");
@@ -157,8 +155,8 @@ int main() {
                 gets(order[i].cpf);
                 
                 // Verificando se há alguém com o CPF registrado
-                int valido_cpf = 0;
-                for (int j = 0; j < 5; j++) {
+                int valido_cpf = 0, j;
+                for (j = 0; j < 5; j++) {
                     if (strcmp(order[i].cpf, cliente[j].cpf) == 0) {
                         valido_cpf = 1;
                         break;
@@ -257,6 +255,7 @@ int main() {
 
             // Alterar informacoes
             case 2:
+                codigo_valido = 0;
                 clearsrc();
                 printf("+++ Estoque disponivel +++\n\n\n");
 
@@ -267,6 +266,35 @@ int main() {
                     if (produto[i].quantidade != 0) {
                             printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
                         }
+                }
+
+                printf("Informe o codigo do produto que deseja alterar as informacoes: ");
+                scanf("%d", &codigo_alteracao);
+
+                // Procura do codigo informado no registro de produtos
+                for (codigo_produto_atual = 0; codigo_produto_atual < 4; codigo_produto_atual++) {
+                    if (codigo_alteracao == produto[codigo_produto_atual].codigo_produto){
+                        codigo_valido = 1;
+                        break;
+                    }
+                }
+
+                if (codigo_valido) {
+                    printf("Informe o novo codigo para o produto: # ");
+                    scanf("%d", &produto[codigo_produto_atual].codigo_produto);
+                    printf("Informe o novo nome para o produto: ");
+                    gets(produto[codigo_produto_atual].nome);
+                    gets(produto[codigo_produto_atual].nome);
+                    printf("Informe a nova quantidade para o produto: ");
+                    scanf("%d", &produto[codigo_produto_atual].quantidade);
+                    printf("Informe o novo preco para o produto: # ");
+                    scanf("%f", &produto[codigo_produto_atual].preco);
+
+                    clearsrc();
+                    printf("+++ Informacoes alteradas com sucesso!\n\n");
+                } else {
+                    clearsrc();
+                    printf("+++ Nao encontramos um produto com esse codigo +++\n\n");
                 }
 
                 break;

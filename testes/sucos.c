@@ -73,6 +73,7 @@ int main() {
     } 
 
 
+    // Loop do menu principal
     while (escolha_principal != 0) {
 
         // Menu Principal
@@ -111,7 +112,7 @@ int main() {
             clearsrc();
             printf("+++ Registrar Cliente +++\n\n");
             printf("Informe o nome: ");
-            gets(cliente[counter_client].nome);
+            gets(cliente[counter_client].nome); // Limpar o buffer - é um "dumb gets" - terá mais desses ao longo do código
             gets(cliente[counter_client].nome);
             printf("Informe o CPF: ");
             scanf("%s", cliente[counter_client].cpf);

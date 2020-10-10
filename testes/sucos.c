@@ -27,6 +27,7 @@ void clearsrc();
         int codigo_produto;
         int quantidade;
         char cpf[20];
+        char nome_pedido[40];
     } Pedido;
 
     // Criacao do vetor de structs
@@ -39,7 +40,7 @@ int main() {
     // Variaveis auxiliares
     float saldo_balanca = 0;
     int choice = 5, choice_2 = 0, pedido = 0, i, codigo_pedido = 0, id_client = 0, quantidade_produto = 0;
-    int codigo_valido = 0, codigo_produto_atual = 0, codigo_remocao = 0, codigo_alteracao = 0;
+    int codigo_valido = 0, codigo_produto_atual = 0, codigo_remocao = 0, codigo_alteracao = 0, estoque_valido = 0;
 
     // Inicializando o vetor de struct Cliente
     for (i = 0; i < 5; i++) {
@@ -62,6 +63,7 @@ int main() {
         order[i].codigo_produto = 0;
         order[i].quantidade = 0;
         strcpy(order[i].cpf, "NULL");
+        strcpy(order[i].nome_pedido, "NULL");
 
     } 
 
@@ -69,18 +71,19 @@ int main() {
     while (choice != 0) {
 
         // Menu Principal
-        printf("\n\n+++++++++++++++++++++++++++++++++++++++\n");
-        printf("+++ ESSA EH UMA VERSAO DE TESTES    +++\n");
-        printf("+++ CLIENTES MAXIMOS = 5            +++\n");
-        printf("+++ VARIEDADE MAXIMA NO ESTOQUE = 4 +++\n");
-        printf("+++ PEDIDOS MAXIMOS = 50            +++\n");
-        printf("+++++++++++++++++++++++++++++++++++++++\n\n");
+        // printf("\n\n+++++++++++++++++++++++++++++++++++++++\n");
+        // printf("+++ ESSA EH UMA VERSAO DE TESTES    +++\n");
+        // printf("+++ CLIENTES MAXIMOS = 5            +++\n");
+        // printf("+++ VARIEDADE MAXIMA NO ESTOQUE = 4 +++\n");
+        // printf("+++ PEDIDOS MAXIMOS = 50            +++\n");
+        // printf("+++++++++++++++++++++++++++++++++++++++\n\n");
         printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
-        printf("1. Registrar cliente        [FEITO]\n");
-        printf("2. Realizar pedido          [FEITO]\n");
-        printf("3. Alterar estoque          [FEITO]\n");
-        printf("4. Exibir saldo da balanca  [FEITO]\n");
-        printf("[DEV] 5. Exibir todos os clientes registrados\n");
+        printf("1. Registrar cliente                    [FEITO]\n");
+        printf("2. Realizar pedido                      [FEITO]\n");
+        printf("3. Alterar estoque                      [FEITO]\n");
+        printf("4. Exibir saldo da balanca              [FEITO]\n");
+        printf("5. Exibir todos os clientes registrados [DEV] \n");
+        printf("6. Exibir todos os pedidos registrados  [DEV] \n");
         printf("0. Sair\n\n");
         printf("Sua escolha: ");
         scanf("%d", &choice);
@@ -129,18 +132,26 @@ int main() {
             {
                 // Para não mostrar os slots que ainda não foram preenchidos com algum produto
                 if (produto[i].quantidade != 0) {
+                        estoque_valido = 1;
                         printf("Codigo #%d  - %s        - Quantidade: %d | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
                     }
+            }
+
+            // Verificando se já existe registro de produtos no estoque
+            if (estoque_valido == 0) {
+                printf("+++ Nao temos produtos no estoque ainda. +++\n+++ Registre um primeiro! +++\n\n");
+                pedido--;
+                break;
             }
             
             printf("\n");
             printf("Pedido numero #%d\n", pedido);
             printf("Informe o codigo do produto: #");
-            scanf("%d", &codigo_pedido);
+            scanf("%d", &order[pedido].codigo_produto);
 
             // Procurar se o código informado pertence à alguma mercadoria
             for (codigo_produto_atual = 0; codigo_produto_atual < 4; codigo_produto_atual++) {
-                if (codigo_pedido == produto[codigo_produto_atual].codigo_produto) {
+                if (order[pedido].codigo_produto == produto[codigo_produto_atual].codigo_produto) {
                     // Verificar se o código que representa essa mercadoria tem quantidade > 0 no estoque
                     if (produto[codigo_produto_atual].quantidade > 0) {
                         codigo_valido = 1;
@@ -149,32 +160,28 @@ int main() {
                 }
             }
 
+            // Se o codigo informado realmente corresponder a um produto registrado
             if (codigo_valido) {
                 printf("Informe o CPF: ");
-                gets(order[i].cpf);
-                gets(order[i].cpf);
+                gets(order[pedido].cpf);
+                gets(order[pedido].cpf);
                 
                 // Verificando se há alguém com o CPF registrado
                 int valido_cpf = 0, j;
                 for (j = 0; j < 5; j++) {
-                    if (strcmp(order[i].cpf, cliente[j].cpf) == 0) {
+                    if (strcmp(order[pedido].cpf, cliente[j].cpf) == 0) {
                         valido_cpf = 1;
-                        break;
-                    } else {
-                        clearsrc();
-                        printf("+++ Nao existe esse CPF cadastrado em nosso sistema. +++\n\n");
-                        pedido--;
                         break;
                     }
                 }
 
                 // Caso não tenha encontrado alguém com o CPF - Volta para o menu principal
                 if (valido_cpf == 0) {
+                    clearsrc();
+                    printf("+++ Nao existe esse CPF cadastrado em nosso sistema. +++\n\n");
                     pedido--;
                     break;
                 }
-
-                // FAZER AS VERIFICACOES A PARTIR DAQUI
 
                 printf("Informe a quantidade desejada: ");
                 scanf("%d", &order[pedido].quantidade);
@@ -194,6 +201,10 @@ int main() {
 
                 // Alteração no saldo da balança
                 saldo_balanca += order[pedido].quantidade * produto[codigo_produto_atual].preco;
+
+                // Registrando o nome do produto no pedido
+                strcpy(order[pedido].nome_pedido, produto[codigo_produto_atual].nome);
+
                 printf("+++ Pedido realizado com sucesso! +++\n\n");
                 break;
             }
@@ -363,12 +374,28 @@ int main() {
             clearsrc();
             for (i = 0; i < 5; i++)
             {
-                printf("Nome #%d      - %s\n", i, cliente[i].nome);
-                printf("CPF #%d       - %s\n", i, cliente[i].cpf);
-                printf("telefone #%d  - %s\n", i, cliente[i].telefone);
-                printf("instagram #%d - %s\n\n\n", i, cliente[i].id_insta);
+                if (strcmp(cliente[i].cpf, "NULL") != 0) {
+                    printf("Cliente nº %d\n", i+1);
+                    printf("Nome       - %s\n", cliente[i].nome);
+                    printf("CPF        - %s\n", cliente[i].cpf);
+                    printf("telefone   - %s\n", cliente[i].telefone);
+                    printf("instagram  - %s\n\n\n", cliente[i].id_insta);
+                }
             }
             
+            break;
+
+        // Case [DEV] para listagens dos pedidos registrados -- Retirar depois
+        case 6:
+            clearsrc();
+            for (i = 0; i < 50; i++) {
+                if (order[i].quantidade != 0) {
+                    printf("Pedido numero #%d\n\n", i);
+                    printf("Pertence ao CPF: %s\n", order[i].cpf);
+                    printf("Item pedido: #%d | %s\n", order[i].codigo_produto, order[i].nome_pedido);
+                    printf("Quantidade: %d\n\n", order[i].quantidade);
+                }
+            }
             break;
 
         // Finalizar o programa

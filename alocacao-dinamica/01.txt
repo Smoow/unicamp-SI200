@@ -1,0 +1,9 @@
+Explique a diferença entre:
+p++; (*p)++; *(p++);
+
+1) p++, sendo "p" uma variável do tipo ponteiro, o incremento fará "p" 
+apontar para o endereço de memória do próximo elemento.
+
+2) (*p)++ incrementa o conteúdo da variável apontada pelo ponteiro "p".
+
+3) *(p++) usa o conteúdo do ponteiro "p" uma casa adiante.

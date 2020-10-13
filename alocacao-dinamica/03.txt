@@ -1,0 +1,29 @@
+Qual o valor de y no final do programa? Tente primeiro descobrir e depois verifique
+no computador o resultado.
+
+#include <stdio.h>
+main() {
+    int y, *p, x;
+    y = 0;
+    p = &y;
+    x = *p;
+    x = 4;
+    (*p)++;
+    x--;
+    (*p) += x;
+    printf ("y = %d\n", y);
+}
+
+
+Resposta: 
+Y recebe 0, 
+P recebe o endereço de Y, 
+X recebe o conteúdo de P (0), 
+X recebe 4, 
+conteúdo de P (0) acresce 1 (1),
+X decrementa 1 (3),
+conteúdo de P recebe P + X = 1 + 3 = 4,
+Printa 'y = 4'.
+
+Portanto, o valor de "y" no final do programa é 4.
+

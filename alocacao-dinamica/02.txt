@@ -1,0 +1,5 @@
+Explique o significado de:
+*(p+10)
+
+Quando precisamos usar o conteúdo do ponteiro 10 posições adiante, usamos
+*(p+10).

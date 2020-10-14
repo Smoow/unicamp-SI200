@@ -380,7 +380,7 @@ int main() {
             for (i = 0; i < 5; i++)
             {
                 if (strcmp(cliente[i].cpf, "NULL") != 0) {
-                    printf("Cliente nº %d\n", i+1);
+                    printf("Cliente numero: %d\n", i+1);
                     printf("Nome       - %s\n", cliente[i].nome);
                     printf("CPF        - %s\n", cliente[i].cpf);
                     printf("telefone   - %s\n", cliente[i].telefone);

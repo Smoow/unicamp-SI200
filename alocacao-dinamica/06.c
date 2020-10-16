@@ -28,7 +28,7 @@ int main() {
 	// Versao Malloc:
 	//	produto = (struct mercadoria *) malloc(max * sizeof(struct mercadoria));
 	// Usando Calloc para inicializar com zeros
-    produto = (struct mercadoria *) calloc(max, max * sizeof(struct mercadoria));
+    produto = (struct mercadoria *) calloc(max, sizeof(struct mercadoria));
 
     int escolha = 0;
 

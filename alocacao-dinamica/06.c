@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 // Prototipos das funcoes
 void cadastrar();
@@ -26,7 +25,10 @@ int max = 20;
 // Main
 int main() {
 
-    produto = (struct mercadoria *) malloc(max * sizeof(struct mercadoria));
+	// Versao Malloc:
+	//	produto = (struct mercadoria *) malloc(max * sizeof(struct mercadoria));
+	// Usando Calloc para inicializar com zeros
+    produto = (struct mercadoria *) calloc(max, max * sizeof(struct mercadoria));
 
     int escolha = 0;
 
@@ -96,7 +98,7 @@ void cadastrar() {
     // Verificacao se ja existe uma mercadoria com esse codigo
     for (i = 0; i < max; i++) {
         if (codigo_para_verificar == produto[i].codigo_mercadoria) {
-            printf("\nCODIGO JA CADASTRADO.\n");
+            printf("\nCODIGO JA CADASTRADO.\n\n");
             return;
         }  
     }
@@ -154,14 +156,14 @@ void realizar_pedido() {
     
     // Se o codigo informado nao for valido (nao estiver cadastrado no estoque)
     if (!valido) { // Ou valido == 0
-        printf("\nMERCADORIA NÃO CADASTRADA.\n\n");
+        printf("\nMERCADORIA NAO CADASTRADA.\n\n");
     } else {
         printf("Informe a quantidade desejada: ");
         scanf("%d", &quantidade_informada);
 
         // Verificacao da quantidade informada
         if (quantidade_informada > produto[produto_atual].quantidade_mercadoria) {
-            printf("\nESTOQUE INSUFICIENTE DA MERCADORIA.\n");
+            printf("\nESTOQUE INSUFICIENTE DA MERCADORIA.\n\n");
         } else {
             produto[produto_atual].quantidade_mercadoria -= quantidade_informada;
             printf("\nPedido realizado com sucesso!\n\n");
@@ -188,7 +190,7 @@ void atualizar_dados() {
 
     // Se o codigo informado nao for valido (nao estiver cadastrado no estoque)
     if (!valido) { // Ou valido == 0
-        printf("\nMERCADORIA NÃO CADASTRADA.\n\n");
+        printf("\nMERCADORIA NAO CADASTRADA.\n\n");
     } else {
         
         // Realizando as alteracoes

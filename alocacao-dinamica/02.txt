@@ -3,3 +3,4 @@ Explique o significado de:
 
 Quando precisamos usar o conteúdo do ponteiro 10 posições adiante, usamos
 *(p+10).
+

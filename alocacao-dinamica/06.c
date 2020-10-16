@@ -20,12 +20,13 @@ struct mercadoria
 
 // Variaveis globais
 int counter_mercadoria = 0;
+int max = 20;
 
 
 // Main
 int main() {
 
-    produto = (struct mercadoria *) malloc(20 * sizeof(struct mercadoria));
+    produto = (struct mercadoria *) malloc(max * sizeof(struct mercadoria));
 
     int escolha = 0;
 
@@ -68,6 +69,7 @@ int main() {
             break;
         
         default:
+            printf("\nOpcao invalida!\n\n");
             break;
         }
 
@@ -81,12 +83,18 @@ void cadastrar() {
 
     int i, codigo_para_verificar;
 
+    // Verificacao se precisamos realocar mais memoria
+    if (counter_mercadoria == max) {
+        max += 10;
+        produto = (struct mercadoria *) realloc(produto, max * sizeof(struct mercadoria));
+    }
+
     // Registrando o codigo da mercadoria
     printf("\nInforme o codigo da mercadoria: ");
     scanf("%d", &codigo_para_verificar);
 
     // Verificacao se ja existe uma mercadoria com esse codigo
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < max; i++) {
         if (codigo_para_verificar == produto[i].codigo_mercadoria) {
             printf("\nCODIGO JA CADASTRADO.\n");
             return;
@@ -116,7 +124,7 @@ void listar_estoque() {
     int i;
 
     // Loop para percorrer todos os espacos da memoria reservada para alocacao da mercadoria
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < max; i++) {
         // Condicao para printar apenas a mercadoria que estiver registrada
         // ou seja, codigo != 0
         if (produto[i].codigo_mercadoria != 0) {
@@ -137,7 +145,7 @@ void realizar_pedido() {
     scanf("%d", &codigo_informado);
 
     // Verificacao do codigo informado
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < max; i++) {
         if (codigo_informado == produto[i].codigo_mercadoria) {
             valido = 1;
             produto_atual = i;
@@ -171,7 +179,7 @@ void atualizar_dados() {
     scanf("%d", &codigo_informado);
 
     // Verificacao do codigo informado
-    for (i = 0; i < 20; i++) {
+    for (i = 0; i < max; i++) {
         if (codigo_informado == produto[i].codigo_mercadoria) {
             valido = 1;
             produto_atual = i;

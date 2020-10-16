@@ -6,6 +6,7 @@
 void cadastrar();
 void listar_estoque();
 void realizar_pedido();
+void atualizar_dados();
 
 
 // Definicao das structs globais
@@ -58,7 +59,7 @@ int main() {
         
         // Atualizacao de dados
         case 4:
-            cadastrar();
+            atualizar_dados();
             break;
         
         // Sair
@@ -129,6 +130,67 @@ void listar_estoque() {
 // Funcao realizar_pedido
 void realizar_pedido() {
 
+    int i, valido = 0, produto_atual;
+    int codigo_informado, quantidade_informada;
 
+    printf("\nInforme o codigo da mercadoria: ");
+    scanf("%d", &codigo_informado);
+
+    // Verificacao do codigo informado
+    for (i = 0; i < 20; i++) {
+        if (codigo_informado == produto[i].codigo_mercadoria) {
+            valido = 1;
+            produto_atual = i;
+        }
+    }
     
+    // Se o codigo informado nao for valido (nao estiver cadastrado no estoque)
+    if (!valido) { // Ou valido == 0
+        printf("\nMERCADORIA NÃO CADASTRADA.\n\n");
+    } else {
+        printf("Informe a quantidade desejada: ");
+        scanf("%d", &quantidade_informada);
+
+        // Verificacao da quantidade informada
+        if (quantidade_informada > produto[produto_atual].quantidade_mercadoria) {
+            printf("\nESTOQUE INSUFICIENTE DA MERCADORIA.\n");
+        } else {
+            produto[produto_atual].quantidade_mercadoria -= quantidade_informada;
+            printf("\nPedido realizado com sucesso!\n\n");
+        }
+    }
+}
+
+// Funcao atualizar_dados
+void atualizar_dados() {
+
+    int i, valido = 0, produto_atual;
+    int codigo_informado;
+
+    printf("\nInforme o codigo da mercadoria: ");
+    scanf("%d", &codigo_informado);
+
+    // Verificacao do codigo informado
+    for (i = 0; i < 20; i++) {
+        if (codigo_informado == produto[i].codigo_mercadoria) {
+            valido = 1;
+            produto_atual = i;
+        }
+    }
+
+    // Se o codigo informado nao for valido (nao estiver cadastrado no estoque)
+    if (!valido) { // Ou valido == 0
+        printf("\nMERCADORIA NÃO CADASTRADA.\n\n");
+    } else {
+        
+        // Realizando as alteracoes
+        printf("Informe a nova descricao da mercadoria: ");
+        gets(produto[produto_atual].descricao_mercadoria); // Dumb 'gets'
+        gets(produto[produto_atual].descricao_mercadoria);
+
+        printf("Informe a nova quantidade da mercadoria: ");
+        scanf("%d", &produto[produto_atual].quantidade_mercadoria);
+
+        printf("\nAlteracoes realizadas com sucesso!\n\n");
+    }
 }

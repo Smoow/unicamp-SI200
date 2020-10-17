@@ -30,6 +30,12 @@ int main() {
 	// Usando Calloc para inicializar com zeros
     produto = (struct mercadoria *) calloc(max, sizeof(struct mercadoria));
 
+    // Verificacao se a alocacao de memoria foi bem sucedida
+    if (!produto) {
+        printf("\nMemoria insuficiente!\n\n");
+        return 0;
+    }
+
     int escolha = 0;
 
     while (escolha != 5) {
@@ -89,6 +95,13 @@ void cadastrar() {
     if (counter_mercadoria == max) {
         max += 10;
         produto = (struct mercadoria *) realloc(produto, max * sizeof(struct mercadoria));
+
+        // Verificacao se a realocacao de memoria foi bem sucedida
+        if (!produto) {
+            printf("\nMemoria insuficiente!\n\n");
+            return;
+        }
+
     }
 
     // Registrando o codigo da mercadoria

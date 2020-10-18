@@ -1,0 +1,37 @@
+# Project: SeuMadeu
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o registro.o pedidos.o estoque.o
+LINKOBJ  = main.o registro.o pedidos.o estoque.o
+LIBS     = -L"D:/devc++/MinGW64/lib" -L"D:/devc++/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"D:/devc++/MinGW64/include" -I"D:/devc++/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/devc++/MinGW64/include" -I"D:/devc++/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = SeuMadeu.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+registro.o: registro.c
+	$(CC) -c registro.c -o registro.o $(CFLAGS)
+
+pedidos.o: pedidos.c
+	$(CC) -c pedidos.c -o pedidos.o $(CFLAGS)
+
+estoque.o: estoque.c
+	$(CC) -c estoque.c -o estoque.o $(CFLAGS)

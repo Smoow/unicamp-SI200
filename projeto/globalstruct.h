@@ -28,9 +28,13 @@ struct produtos
     float preco;
 } *produto;
 
+// Funcoes globais
+void clearscr();
+
 // Valores globais
 int max_clientes;
 int max_pedidos;
 int max_produtos;
+float saldo_balanca;
 
 #endif

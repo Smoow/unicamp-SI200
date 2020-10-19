@@ -159,7 +159,8 @@ void exibir_estoque() {
         // Para nao mostrar os slots que ainda nao foram preenchidos com algum produto
         if (produto[i].codigo_produto != 0) {
         	estoque_valido = 1;
-            printf("Codigo: #%d 	| Nome: %s\nQuantidade: %03d   | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].nome, produto[i].quantidade, produto[i].preco);
+            printf("Nome: %s\n", produto[i].nome);
+            printf("Codigo: #%d   | Quantidade: %d   | Preco: R$%.2f\n", produto[i].codigo_produto, produto[i].quantidade, produto[i].preco);
             printf("-----------------------------------------------------\n");
         }
     }

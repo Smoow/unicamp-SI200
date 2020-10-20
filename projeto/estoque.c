@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "estoque.h"
 #include "globalstruct.h"
+#include "estoque.h"
 
 int max_produtos = 20;
 int counter_produtos = 0;
 
 
-void alterar_estoque() {
+void gerenciar_estoque() {
 	
 	// Variaveis auxiliares
 	int escolha = 0, lugar_vazio = 0, i;
@@ -32,7 +32,7 @@ void alterar_estoque() {
 	// Sub-menu para escolha do que fazer
 	clearscr();
 	exibir_estoque();
-	printf("+++ Alteracao do estoque +++\n\n");
+	printf("+++ Gerenciamento do estoque +++\n\n");
     printf("1. Adicionar item\n");
     printf("2. Alterar informacoes\n");
     printf("3. Remover item\n");

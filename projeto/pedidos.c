@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pedidos.h"
 #include "globalstruct.h"
+#include "pedidos.h"
 
 int max_pedidos = 20;
 int counter_pedidos = 0;
 float saldo_balanca = 0;	
 
+// Funcao para realizar o pedido
 void realizar_pedido() {
 	
 	// Verificacao se precisamos realocar mais memoria

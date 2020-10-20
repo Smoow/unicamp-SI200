@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "globalstruct.h"
-#include "registro.h"
+#include "clientes.h"
 #include "pedidos.h"
 #include "estoque.h"
 
@@ -30,12 +30,11 @@ int main() {
 		
 		// Menu principal
 		printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
-	    printf("1. Registrar cliente                    [FEITO]\n");
+	    printf("1. Gerenciar clientes                   [FEITO]\n");
 	    printf("2. Realizar pedido                      [FEITO]\n");
-	    printf("3. Alterar estoque                      [FEITO]\n");
+	    printf("3. Gerenciar estoque                    [FEITO]\n");
 	    printf("4. Exibir saldo da balanca              [FEITO]\n");
-		printf("5. Exibir todos os clientes registrados [FEITO] \n");
-	    printf("6. Exibir todos os pedidos registrados  [FEITO] \n");
+	    printf("5. Exibir todos os pedidos registrados  [FEITO] \n");
 	    printf("0. Sair\n\n");
 	    printf("Sua escolha: ");
 	    scanf("%d", &escolha_principal);
@@ -45,7 +44,8 @@ int main() {
 			
 			// Registrar cliente
 			case 1:
-				registrar_cliente();
+				clearscr();
+				gerenciar_clientes();
 				break;
 				
 			// Realizar pedido
@@ -55,7 +55,7 @@ int main() {
 				
 			// Alterar estoque
 			case 3:
-				alterar_estoque();
+				gerenciar_estoque();
 				break;
 			
 			// Exibir o saldo da balanca	
@@ -63,13 +63,8 @@ int main() {
 				exibir_balanca();
 				break;
 				
-			// Exibir todos os clientes registrados
-			case 5:
-				exibir_clientes_registrados();
-				break;
-				
 			// Exibir todos os pedidos realizados
-			case 6:
+			case 5:
 				exibir_pedidos_realizados();
 				break;
 			
@@ -83,9 +78,7 @@ int main() {
 				printf("\nOpcao invalida.\n");
 				break;
 		}
-	
 	}
-	
 	
 	return 0;
 }

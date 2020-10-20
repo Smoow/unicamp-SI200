@@ -119,7 +119,7 @@ void exibir_pedidos_realizados() {
 		// Verificacao para nao mostrar os pedidos Nulos (campos ainda nao preenchidos, mas ja alocados)
 		if (strcmp(pedido[i].nome_pedido, "") != 0) {
 			printf("CPF: %s\n", pedido[i].cpf);
-			printf("Codigo do produto: %d\n", pedido[i].codigo_produto);
+			printf("Codigo do produto: #%d\n", pedido[i].codigo_produto);
 			printf("Item: %s\n", pedido[i].nome_pedido);
 			printf("Quantidade: %d\n", pedido[i].quantidade);
 			printf("-------------------------\n");

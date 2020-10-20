@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "estoque.h"
 #include "globalstruct.h"
 
@@ -10,7 +11,7 @@ int counter_produtos = 0;
 void alterar_estoque() {
 	
 	// Variaveis auxiliares
-	int escolha = 0, i;
+	int escolha = 0, lugar_vazio = 0, i;
 	int codigo_valido, codigo_registrar, codigo_alteracao, codigo_produto_atual, codigo_remocao;
 	
 	// Verificacao se precisamos realocar mais memoria
@@ -43,6 +44,7 @@ void alterar_estoque() {
     	
     	// Adicionar item no estoque
     	case 1:
+    		
 	    	clearscr();
 	    	printf("\n+++ Adicionar item +++\n");
 	        printf("Informe o codigo do produto: #");
@@ -56,16 +58,25 @@ void alterar_estoque() {
 	        		return;
 				}
 			}
+			
+			// Encontrar algum lugar da struct pedido que esteja vazio
+			for (i = 0; i < max_produtos; i++) {
+				if (produto[i].codigo_produto == 0) {
+					lugar_vazio = i;
+					break;
+				}
+			}
+			
 	        
-	        produto[counter_produtos].codigo_produto = codigo_registrar;
+	        produto[lugar_vazio].codigo_produto = codigo_registrar;
 	        
 	        printf("Informe o nome do produto: ");
-	        gets(produto[counter_produtos].nome);
-	        gets(produto[counter_produtos].nome);
+	        gets(produto[lugar_vazio].nome);
+	        gets(produto[lugar_vazio].nome);
 	        printf("Informe a quantidade disponivel do produto: ");
-	        scanf("%d", &produto[counter_produtos].quantidade);
+	        scanf("%d", &produto[lugar_vazio].quantidade);
 	        printf("Informe o preco do produto: ");
-	        scanf("%f", &produto[counter_produtos].preco);
+	        scanf("%f", &produto[lugar_vazio].preco);
 	        
 	        clearscr();
 	    	printf("\n+++ Cadastro realizado com sucesso! +++\n\n");
@@ -95,7 +106,7 @@ void alterar_estoque() {
                 gets(produto[codigo_produto_atual].nome);
                 printf("Informe a nova quantidade para o produto: ");
                 scanf("%d", &produto[codigo_produto_atual].quantidade);
-                printf("Informe o novo preco para o produto: # ");
+                printf("Informe o novo preco para o produto: R$ ");
                 scanf("%f", &produto[codigo_produto_atual].preco);
                 
                 clearscr();
@@ -110,9 +121,7 @@ void alterar_estoque() {
     	case 3:
     		codigo_valido = 0;
     		
-    		exibir_estoque();
-    		
-    		printf("Informe o codigo do item que deseja remover: ");
+    		printf("\nInforme o codigo do item que deseja remover: ");
             scanf("%d", &codigo_remocao);
             
             // Procura do codigo informado no registro de produtos
@@ -125,11 +134,13 @@ void alterar_estoque() {
             
             // Fazer o produto removido receber codigo zero e quantidade zero
             if (codigo_valido) {
-                produto[codigo_produto_atual].codigo_produto = 0;
-                produto[codigo_produto_atual].quantidade = 0;
                 clearscr();
                 printf("\n+++ Produto removido com sucesso! +++\n");
                 printf("Voce removeu: %s\n\n", produto[codigo_produto_atual].nome);
+                produto[codigo_produto_atual].codigo_produto = 0;
+                produto[codigo_produto_atual].quantidade = 0;
+                produto[codigo_produto_atual].preco = 0;
+                strcpy(produto[codigo_produto_atual].nome, "");
                 counter_produtos--;
             } else {
             	clearscr();

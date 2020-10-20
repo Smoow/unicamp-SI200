@@ -65,7 +65,7 @@ void exibir_clientes_registrados() {
 			printf("Nome: %s\n", cliente[i].nome);
 			printf("CPF: %s\n", cliente[i].cpf);
 			printf("Telefone: %s\n", cliente[i].telefone);
-			printf("Instagram: %s\n", cliente[i].id_insta);
+			printf("Instagram: @%s\n", cliente[i].id_insta);
 			printf("-------------------------\n");
 		}
 	}

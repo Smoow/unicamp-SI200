@@ -4,9 +4,8 @@
 #include "globalstruct.h"
 #include "pedidos.h"
 
-int max_pedidos = 20;
-int counter_pedidos = 0;
-float saldo_balanca = 0;	
+int max_pedidos = 20, counter_pedidos = 0;
+float saldo_balanca = 0;
 
 // Funcao para realizar o pedido
 void realizar_pedido() {
@@ -35,7 +34,7 @@ void realizar_pedido() {
     printf("Informe o codigo do produto: #");
     scanf("%d", &pedido[counter_pedidos].codigo_produto);
     
-    // Procurar se o código informado pertence a alguma mercadoria
+    // Procurar se o codigo informado pertence a alguma mercadoria
     for (codigo_produto_atual = 0; codigo_produto_atual < max_pedidos; codigo_produto_atual++) {
         if (pedido[counter_pedidos].codigo_produto == produto[codigo_produto_atual].codigo_produto) {
             // Verificar se o codigo que representa essa mercadoria tem quantidade > 0 no estoque
@@ -60,7 +59,7 @@ void realizar_pedido() {
             }
         }
 
-        // Caso não tenha encontrado alguém com o CPF - Volta para o menu principal
+        // Caso nao tenha encontrado alguem com o CPF - Volta para o menu principal
         if (cpf_valido == 0) {
             clearscr();
             printf("+++ Nao existe esse CPF cadastrado em nosso sistema. +++\n\n");
@@ -70,7 +69,7 @@ void realizar_pedido() {
         printf("Informe a quantidade desejada: ");
         scanf("%d", &pedido[counter_pedidos].quantidade);
 
-        // Verificação de estoque
+        // Verificacao de estoque
         if (pedido[counter_pedidos].quantidade > produto[codigo_produto_atual].quantidade) {
             clearscr();
             printf("+++ Nao temos essa quantidade em estoque +++\n\n");
@@ -79,15 +78,16 @@ void realizar_pedido() {
 
         clearscr();
 
-        // Alteração na quantidade do estoque
+        // Alteracao na quantidade do estoque
         produto[codigo_produto_atual].quantidade -= pedido[counter_pedidos].quantidade;
 
-        // Alteração no saldo da balança
+        // Alteracao no saldo da balanca
         saldo_balanca += pedido[counter_pedidos].quantidade * produto[codigo_produto_atual].preco;
 
         // Registrando o nome do produto no pedido
         strcpy(pedido[counter_pedidos].nome_pedido, produto[codigo_produto_atual].nome);
         
+        // Caso tudo esteja ok, o pedido sera registrado e o contador de pedidos sera incrementado
         counter_pedidos++;
 
         printf("+++ Pedido realizado com sucesso! +++\n\n");
@@ -97,8 +97,6 @@ void realizar_pedido() {
         printf("+++ Mercadoria nao existe! +++\n\n");
         return;
     }
-	
-	
 }
 
 // Funcao para exibir o saldo da balanca
@@ -117,7 +115,7 @@ void exibir_pedidos_realizados() {
 	clearscr();
 	printf("\n+++ Pedidos realizados +++\n\n");
 	for (i = 0; i < max_pedidos; i++) {
-		// Verificacao para nao mostrar os pedidos Nulos (campos ainda nao preenchidos, mas ja alocados)
+		// Verificacao para nao mostrar os pedidos Nulos (campos ainda nao preenchidos, mas ja alocados na memoria)
 		if (strcmp(pedido[i].nome_pedido, "") != 0) {
 			printf("CPF: %s\n", pedido[i].cpf);
 			printf("Codigo do produto: #%d\n", pedido[i].codigo_produto);
@@ -125,6 +123,5 @@ void exibir_pedidos_realizados() {
 			printf("Quantidade: %d\n", pedido[i].quantidade);
 			printf("-------------------------\n");
 		}
-	}
-	
+	}	
 }

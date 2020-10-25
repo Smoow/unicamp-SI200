@@ -26,9 +26,6 @@ void gerenciar_estoque() {
 	    }
 	}
 	
-
-	
-	
 	// Sub-menu para escolha do que fazer
 	clearscr();
 	exibir_estoque();
@@ -67,7 +64,7 @@ void gerenciar_estoque() {
 				}
 			}
 			
-	        
+			// Registrar o codigo informado no lugar vazio encontrado
 	        produto[lugar_vazio].codigo_produto = codigo_registrar;
 	        
 	        printf("Informe o nome do produto: ");
@@ -80,6 +77,8 @@ void gerenciar_estoque() {
 	        
 	        clearscr();
 	    	printf("\n+++ Cadastro realizado com sucesso! +++\n\n");
+
+			// Caso tudo esteja ok, o produto sera registrado e o contador de produtos sera incrementado
 	        counter_produtos++;	
 	    	break;
     	
@@ -148,22 +147,25 @@ void gerenciar_estoque() {
                 }
             break;
             
+			// Para voltar ao menu anterior
             case 0:
             	clearscr();
             	break;
-            	
+            
+			// Tratamento de entrada invalida
             default:
             	clearscr();
             	printf("\nOpcao invalida.\n");
             	break;
 	}
-	
 }
 
+// Funcao para exibir o estoque
 void exibir_estoque() {
 	
-	int estoque_valido = 0;
-	int i;
+	// Varivaeis auxiliares na funcao
+	int estoque_valido = 0, i;
+
 	// Print do estoque disponivel
 	printf("\n+++ Estoque disponivel +++\n\n");
     for (i = 0; i < max_produtos; i++) {   
@@ -176,6 +178,8 @@ void exibir_estoque() {
         }
     }
     
+	// Caso ainda nao tenha nenhum produto registrado no estoque, informara que precisa registrar um antes de visualizar os
+	// itens preenchidos
     if (estoque_valido == 0) {
     	printf("+++ Nao temos produtos no estoque ainda. +++\n+++ Registre um primeiro! +++\n\n");
     	return;
@@ -184,6 +188,7 @@ void exibir_estoque() {
     printf("\n");
 }
 
+// Funcao para limpar o terminal
 void clearscr() {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }

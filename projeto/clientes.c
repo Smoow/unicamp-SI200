@@ -4,8 +4,7 @@
 #include "globalstruct.h"
 #include "clientes.h"
 
-int max_clientes = 20;
-int counter_clientes = 0;
+int max_clientes = 20, counter_clientes = 0;
 
 // Variaveis globais auxiliares
 int i = 0, cpf_valido = 0, cliente_atual = 0;
@@ -92,7 +91,7 @@ void registrar_cliente() {
 		}	
 	}
 	
-	// Encontrar algum lugar da struct pedido que esteja vazio
+	// Encontrar algum lugar da struct cliente que esteja vazio
 	for (i = 0; i < max_clientes; i++) {
 		if (strcmp(cliente[i].cpf, "") == 0) {
 			lugar_vazio = i;
@@ -116,6 +115,8 @@ void registrar_cliente() {
 	clearscr();
 
     printf("\n+++ Cliente registrado com sucesso! +++\n\n");
+
+    // Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado
     counter_clientes++;
 }
 

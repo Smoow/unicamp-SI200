@@ -1,7 +1,5 @@
-# unicamp-SI200 | Programação II
+# Exercícios e projetos desenvolvidos para a disciplina SI200 - UNICAMP.
+### Todo o conteúdo será público ao final da disciplina
+-----------------------------------------------------
 
-### Exercícios desenvolvidos especificamente para esta disciplina.
-### Provavelmente será open-source ao final da mesma.
-
--------------------------
-Made with ❤ by Smoow
+Made with ♥ by Smoow

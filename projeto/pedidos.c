@@ -49,7 +49,7 @@ void realizar_pedido() {
     if (codigo_valido) {
         printf("Informe o CPF: ");
         gets(pedido[counter_pedidos].cpf);
-        gets(pedido[counter_pedidos].cpf);
+        gets(pedido[counter_pedidos].cpf);  // Dumb gets
                 
         // Verificando se ha alguem com o CPF registrado
         for (j = 0; j < max_pedidos; j++) {

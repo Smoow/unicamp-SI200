@@ -124,6 +124,7 @@ void registrar_cliente() {
 void alterar_cliente() {
 	
 	char cpf_alteracao[40];
+	cpf_valido = 0;
     		
     printf("\nInforme o CPF do cliente que deseja alterar as informacoes: ");
     gets(cpf_alteracao); // Dumb gets

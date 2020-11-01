@@ -5,6 +5,14 @@
 #include "pedidos.h"
 #include "estoque.h"
 
+
+/*******************************************************
+*** Desenvolvido por:								 ***
+*** Pedro Henrique Carreto Morais 		- RA: 186379 ***
+*** Carlos Eduardo de Andrade Pereira	- RA: 168321 ***
+*** Gustavo Alves Fernandes Cesare		- RA: 236146 ***
+*******************************************************/
+
 int main() {
 	
 	// Definicoes de maximo (inicio)
@@ -30,11 +38,11 @@ int main() {
 		
 		// Menu principal
 		printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
-	    printf("1. Gerenciar clientes                   [FEITO]\n");
-	    printf("2. Realizar pedido                      [FEITO]\n");
-	    printf("3. Gerenciar estoque                    [FEITO]\n");
-	    printf("4. Exibir saldo da balanca              [FEITO]\n");
-	    printf("5. Exibir todos os pedidos registrados  [FEITO] \n");
+	    printf("1. Gerenciar clientes                   \n");
+	    printf("2. Realizar pedido                      \n");
+	    printf("3. Gerenciar estoque                    \n");
+	    printf("4. Exibir saldo da balanca              \n");
+	    printf("5. Exibir todos os pedidos registrados  \n");
 	    printf("0. Sair\n\n");
 	    printf("Sua escolha: ");
 	    scanf("%d", &escolha_principal);

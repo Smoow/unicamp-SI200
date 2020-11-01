@@ -9,7 +9,6 @@ struct clientes
     char cpf[20];
 	char telefone[20];
     char id_insta[20];
-        
 } *cliente;
 
 struct pedidos

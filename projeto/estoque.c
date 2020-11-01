@@ -72,7 +72,7 @@ void gerenciar_estoque() {
 	        gets(produto[lugar_vazio].nome);
 	        printf("Informe a quantidade disponivel do produto: ");
 	        scanf("%d", &produto[lugar_vazio].quantidade);
-	        printf("Informe o preco do produto: ");
+	        printf("Informe o preco do produto: R$");
 	        scanf("%f", &produto[lugar_vazio].preco);
 	        
 	        clearscr();
@@ -144,7 +144,7 @@ void gerenciar_estoque() {
             } else {
             	clearscr();
                 printf("\n+++ O codigo informado nao corresponde a nenhum produto!\n\n");
-                }
+            }
             break;
             
 			// Para voltar ao menu anterior

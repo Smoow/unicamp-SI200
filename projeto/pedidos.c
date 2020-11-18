@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "globalstruct.h"
+#include "clientes.h"
+#include "estoque.h"
 #include "pedidos.h"
 
-int max_pedidos = 20, counter_pedidos = 0;
-float saldo_balanca = 0;
+int counter_pedidos = 0;
 
 // Funcao para realizar o pedido
-void realizar_pedido() {
+void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct pedidos *pedido, int *max_pedidos, int *max_produtos, float *saldo_balanca) {
 	
 	// Verificacao se precisamos realocar mais memoria
-	if (counter_pedidos == max_pedidos) {
-	    max_pedidos += 10;
-	    pedido = (struct pedidos *) realloc(pedido, max_pedidos * sizeof(struct pedidos));
+	if (counter_pedidos == *max_pedidos) {
+	    *max_pedidos += 10;
+	    pedido = (struct pedidos *) realloc(pedido, *max_pedidos * sizeof(struct pedidos));
 	
 		// Verificacao se a realocacao de memoria foi bem sucedida
 	    if (!pedido) {
@@ -28,14 +28,15 @@ void realizar_pedido() {
 	int cpf_valido = 0;
 	
 	clearscr();
-	exibir_estoque();
+	exibir_estoque(produto, max_produtos);
 	
 	printf("Pedido numero #%d\n", counter_pedidos + 1);
     printf("Informe o codigo do produto: #");
     scanf("%d", &pedido[counter_pedidos].codigo_produto);
-    
+
+
     // Procurar se o codigo informado pertence a alguma mercadoria
-    for (codigo_produto_atual = 0; codigo_produto_atual < max_pedidos; codigo_produto_atual++) {
+    for (codigo_produto_atual = 0; codigo_produto_atual < *max_pedidos; codigo_produto_atual++) {
         if (pedido[counter_pedidos].codigo_produto == produto[codigo_produto_atual].codigo_produto) {
             // Verificar se o codigo que representa essa mercadoria tem quantidade > 0 no estoque
             if (produto[codigo_produto_atual].quantidade > 0) {
@@ -52,7 +53,7 @@ void realizar_pedido() {
         gets(pedido[counter_pedidos].cpf);  // Dumb gets
                 
         // Verificando se ha alguem com o CPF registrado
-        for (j = 0; j < max_pedidos; j++) {
+        for (j = 0; j < *max_pedidos; j++) {
             if (strcmp(pedido[counter_pedidos].cpf, cliente[j].cpf) == 0) {
                 cpf_valido = 1;
                 break;
@@ -79,10 +80,10 @@ void realizar_pedido() {
         clearscr();
 
         // Alteracao na quantidade do estoque
-        produto[codigo_produto_atual].quantidade -= pedido[counter_pedidos].quantidade;
+       produto[codigo_produto_atual].quantidade -= pedido[counter_pedidos].quantidade;
 
         // Alteracao no saldo da balanca
-        saldo_balanca += pedido[counter_pedidos].quantidade * produto[codigo_produto_atual].preco;
+        *saldo_balanca += pedido[counter_pedidos].quantidade * produto[codigo_produto_atual].preco;
 
         // Registrando o nome do produto no pedido
         strcpy(pedido[counter_pedidos].nome_pedido, produto[codigo_produto_atual].nome);
@@ -100,21 +101,21 @@ void realizar_pedido() {
 }
 
 // Funcao para exibir o saldo da balanca
-void exibir_balanca() {
+void exibir_balanca(float *saldo_balanca) {
 	clearscr();
     printf("-------------------------------------\n");
-    printf("Saldo: R$%.2f\n", saldo_balanca);
+    printf("Saldo: R$%.2f\n", *saldo_balanca);
     printf("-------------------------------------\n\n");
 }
 
 // Funcao para exibir todos os pedidos registrados
-void exibir_pedidos_realizados() {
+void exibir_pedidos_realizados(struct pedidos *pedido, int *max_pedidos) {
 	
 	int i;
 	
 	clearscr();
 	printf("\n+++ Pedidos realizados +++\n\n");
-	for (i = 0; i < max_pedidos; i++) {
+	for (i = 0; i < *max_pedidos; i++) {
 		// Verificacao para nao mostrar os pedidos Nulos (campos ainda nao preenchidos, mas ja alocados na memoria)
 		if (strcmp(pedido[i].nome_pedido, "") != 0) {
 			printf("CPF: %s\n", pedido[i].cpf);

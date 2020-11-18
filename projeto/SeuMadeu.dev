@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000000000000
-UnitCount=8
+UnitCount=7
 
 [VersionInfo]
 Major=1
@@ -61,16 +61,6 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=clientes.c
-CompileCpp=0
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit3]
 FileName=clientes.h
 CompileCpp=0
 Folder=
@@ -80,8 +70,18 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit3]
+FileName=clientes.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
 [Unit4]
-FileName=globalstruct.h
+FileName=estoque.c
 CompileCpp=0
 Folder=
 Compile=1
@@ -91,6 +91,16 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
+FileName=estoque.h
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit7]
 FileName=pedidos.h
 CompileCpp=0
 Folder=
@@ -102,26 +112,6 @@ BuildCmd=
 
 [Unit6]
 FileName=pedidos.c
-CompileCpp=0
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
-FileName=estoque.c
-CompileCpp=0
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit8]
-FileName=estoque.h
 CompileCpp=0
 Folder=
 Compile=1

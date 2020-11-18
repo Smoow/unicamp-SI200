@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o clientes.o pedidos.o estoque.o
-LINKOBJ  = main.o clientes.o pedidos.o estoque.o
+OBJ      = main.o clientes.o estoque.o pedidos.o
+LINKOBJ  = main.o clientes.o estoque.o pedidos.o
 LIBS     = -L"D:/devc++/MinGW64/lib" -L"D:/devc++/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"D:/devc++/MinGW64/include" -I"D:/devc++/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"D:/devc++/MinGW64/include" -I"D:/devc++/MinGW64/x86_64-w64-mingw32/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/devc++/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -30,8 +30,8 @@ main.o: main.c
 clientes.o: clientes.c
 	$(CC) -c clientes.c -o clientes.o $(CFLAGS)
 
-pedidos.o: pedidos.c
-	$(CC) -c pedidos.c -o pedidos.o $(CFLAGS)
-
 estoque.o: estoque.c
 	$(CC) -c estoque.c -o estoque.o $(CFLAGS)
+
+pedidos.o: pedidos.c
+	$(CC) -c pedidos.c -o pedidos.o $(CFLAGS)

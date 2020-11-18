@@ -1,38 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "globalstruct.h"
 #include "clientes.h"
-#include "pedidos.h"
 #include "estoque.h"
-
-
-/*******************************************************
-*** Desenvolvido por:								 ***
-*** Pedro Henrique Carreto Morais 		- RA: 186379 ***
-*** Carlos Eduardo de Andrade Pereira	- RA: 168321 ***
-*** Gustavo Alves Fernandes Cesare		- RA: 236146 ***
-*******************************************************/
+#include "pedidos.h"
 
 int main() {
-	
-	// Definicoes de maximo (inicio)
-	max_clientes = 20; max_pedidos = 20; max_produtos = 20;
-	
-	// Requisitando o espaco de memoria
-	// Fizemos com "Calloc" para inicializarmos tudo com valores Nulos ou Zero
-	// Trataremos disso futuramente, mas com essa inicializacao, ajuda bastante a separarmos o que esta registrado
-	cliente = (struct clientes *) calloc(max_clientes, sizeof(struct clientes));
-	pedido = (struct pedidos *) calloc(max_pedidos, sizeof(struct pedidos));
-	produto = (struct produtos *) calloc(max_produtos, sizeof(struct produtos));
-	
-	// Verificando se a alocacao foi bem sucedida
-	if (!cliente || !pedido || !produto) {
-		printf("\nMemoria insuficiente.\n");
-		return;
-	}
-	
-	// Variaveis auxiliares
+
+    // Variaveis auxiliares
 	int escolha_principal = 1;
+	int max_clientes = 20, max_produtos = 20, max_pedidos = 20;
+	float saldo_balanca = 0;
+	
+	struct clientes *cliente = (struct clientes *) calloc(max_clientes, sizeof(struct clientes));
+	struct produtos *produto = (struct produtos *) calloc(max_produtos, sizeof(struct produtos));
+	struct pedidos *pedido = (struct pedidos *) calloc(max_pedidos, sizeof(struct pedidos));
+	
 	
 	while (escolha_principal != 0) {
 		
@@ -52,28 +34,27 @@ int main() {
 			
 			// Registrar cliente
 			case 1:
-				clearscr();
-				gerenciar_clientes();
+				gerenciar_clientes(cliente, &max_clientes);
 				break;
 				
 			// Realizar pedido
 			case 2:
-				realizar_pedido();
+				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &saldo_balanca);
 				break;
 				
 			// Alterar estoque
 			case 3:
-				gerenciar_estoque();
+				gerenciar_estoque(produto, &max_produtos);
 				break;
 			
 			// Exibir o saldo da balanca	
 			case 4:
-				exibir_balanca();
+				exibir_balanca(&saldo_balanca);
 				break;
 				
 			// Exibir todos os pedidos realizados
 			case 5:
-				exibir_pedidos_realizados();
+				exibir_pedidos_realizados(pedido, &max_pedidos);
 				break;
 			
 			// Finalizacao do programa
@@ -87,6 +68,6 @@ int main() {
 				break;
 		}
 	}
+
 	return 0;
 }
-

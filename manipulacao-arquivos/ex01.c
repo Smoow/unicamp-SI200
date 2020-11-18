@@ -11,7 +11,7 @@ int main() {
     long int telefone;
 
 
-    fp = fopen("arq1.txt", "a");
+    fp = fopen("dados.txt", "a");
     if (!fp) {
         printf("\nErro na abertura do arquivo.\n");
         return 1;

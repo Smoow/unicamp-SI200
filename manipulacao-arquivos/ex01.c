@@ -10,7 +10,6 @@ int main() {
     char nome[40], sangue[3];
     long int telefone;
 
-
     fp = fopen("dados.txt", "a");
     if (!fp) {
         printf("\nErro na abertura do arquivo.\n");

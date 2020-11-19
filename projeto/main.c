@@ -15,7 +15,6 @@ int main() {
 	struct produtos *produto = (struct produtos *) calloc(max_produtos, sizeof(struct produtos));
 	struct pedidos *pedido = (struct pedidos *) calloc(max_pedidos, sizeof(struct pedidos));
 	
-	
 	while (escolha_principal != 0) {
 		
 		// Menu principal

@@ -4,13 +4,12 @@
 #include "estoque.h"
 
 
-int counter_produtos = 0;
-
 void gerenciar_estoque(struct produtos *produto, int *max_produtos) {
 	
 	// Variaveis auxiliares
 	int escolha = 0, lugar_vazio = 0, i;
 	int codigo_valido, codigo_registrar, codigo_alteracao, codigo_produto_atual, codigo_remocao, estoque_valido;
+	int counter_produtos = 0;	// Contador para termos o controle de quantos produtos estao registrados
 	
 	// Verificacao se precisamos realocar mais memoria
 	if (counter_produtos == *max_produtos) {
@@ -67,7 +66,7 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos) {
 	        produto[lugar_vazio].codigo_produto = codigo_registrar;
 	        
 	        printf("Informe o nome do produto: ");
-	        gets(produto[lugar_vazio].nome);
+	        gets(produto[lugar_vazio].nome);	// Dumb gets
 	        gets(produto[lugar_vazio].nome);
 	        printf("Informe a quantidade disponivel do produto: ");
 	        scanf("%d", &produto[lugar_vazio].quantidade);
@@ -96,6 +95,7 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos) {
             	}
             }
             
+			// Se o codigo for valido, ou seja, existir
             if (codigo_valido) {
                 printf("Informe o novo codigo para o produto: #");
                 scanf("%d", &produto[codigo_produto_atual].codigo_produto);
@@ -187,4 +187,3 @@ void exibir_estoque(struct produtos *produto, int *max_produtos) {
     
     printf("\n");
 }
-

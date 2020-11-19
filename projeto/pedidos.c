@@ -5,11 +5,15 @@
 #include "estoque.h"
 #include "pedidos.h"
 
-int counter_pedidos = 0;
 
 // Funcao para realizar o pedido
 void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct pedidos *pedido, int *max_pedidos, int *max_produtos, float *saldo_balanca) {
 	
+	// Variaveis auxiliares
+	int i, j, counter_pedidos = 0;
+	int codigo_valido = 0, codigo_produto_atual = 0;
+	int cpf_valido = 0;
+
 	// Verificacao se precisamos realocar mais memoria
 	if (counter_pedidos == *max_pedidos) {
 	    *max_pedidos += 10;
@@ -22,18 +26,12 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 	    }
 	}
 	
-	// Variaveis auxiliares
-	int i, j;
-	int codigo_valido = 0, codigo_produto_atual = 0;
-	int cpf_valido = 0;
-	
 	clearscr();
 	exibir_estoque(produto, max_produtos);
 	
 	printf("Pedido numero #%d\n", counter_pedidos + 1);
     printf("Informe o codigo do produto: #");
     scanf("%d", &pedido[counter_pedidos].codigo_produto);
-
 
     // Procurar se o codigo informado pertence a alguma mercadoria
     for (codigo_produto_atual = 0; codigo_produto_atual < *max_pedidos; codigo_produto_atual++) {
@@ -49,8 +47,8 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 	// Se o codigo informado realmente corresponder a um produto registrado
     if (codigo_valido) {
         printf("Informe o CPF: ");
-        gets(pedido[counter_pedidos].cpf);
         gets(pedido[counter_pedidos].cpf);  // Dumb gets
+        gets(pedido[counter_pedidos].cpf);  
                 
         // Verificando se ha alguem com o CPF registrado
         for (j = 0; j < *max_pedidos; j++) {

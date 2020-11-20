@@ -3,10 +3,10 @@
 #include <string.h>
 #include "clientes.h"
 
-void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
+void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counter_clientes) {
 		
 	// Variaveis auxiliares
-	int i = 0, cliente_atual = 0, counter_clientes = 0, escolha = 1;
+	int i = 0, cliente_atual = 0, escolha = 1;
 
 	// Variaveis relacionadas ao registro
 	char cpf_verificacao[20];
@@ -20,15 +20,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 	char cpf_remocao[40];
 
 
-	FILE *fpclient;
 	fpclient = fopen("dados/clientsBIN.dat", "rb+");
 
 	if (fpclient != NULL) {		// Caso existir o arquivo
-		fread(&counter_clientes, sizeof(int), 1, fpclient);
-		fread(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+		fread(counter_clientes, sizeof(int), 1, fpclient);
+		fread(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
 		fclose(fpclient);
 	} else {
-		counter_clientes = 0;
+		*counter_clientes = 0;
 	}
 
 
@@ -51,7 +50,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 	    case 1:
 	    	clearscr();
 			// Verificacao se precisamos realocar mais memoria
-		    if (counter_clientes == *max_clientes) {
+		    if (*counter_clientes == *max_clientes) {
 		        *max_clientes += 10;
 		        cliente = (struct clientes *) realloc(cliente, *max_clientes * sizeof(struct clientes));
 		
@@ -99,7 +98,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 		    printf("\n+++ Cliente registrado com sucesso! +++\n\n");
 		
 		    // Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado
-		    counter_clientes++;
+		    (*counter_clientes)++;
 
 			// Gravando todos os registros da memoria no arquivo
 			fpclient = fopen("dados/clientsBIN.dat", "wb");
@@ -107,8 +106,8 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 			} else {
 				// A primeira linha do arquivo contem o numero de registros ja gravados
-				fwrite(&counter_clientes, sizeof(int), 1, fpclient);
-				fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+				fwrite(counter_clientes, sizeof(int), 1, fpclient);
+				fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
 				fclose(fpclient);
 			}
 
@@ -147,8 +146,8 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(&counter_clientes, sizeof(int), 1, fpclient);
-					fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+					fwrite(counter_clientes, sizeof(int), 1, fpclient);
+					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
 					fclose(fpclient);
 				}
 
@@ -196,12 +195,12 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(&counter_clientes, sizeof(int), 1, fpclient);
-					fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+					fwrite(counter_clientes, sizeof(int), 1, fpclient);
+					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
 					fclose(fpclient);
 				}
 
-				counter_clientes--;
+				(*counter_clientes)--;
 			} else {
 				clearscr();
 				printf("\n+++ O CPF informado nao corresponde a nenhum cliente!\n\n");

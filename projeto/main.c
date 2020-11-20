@@ -9,6 +9,7 @@ int main() {
     // Variaveis auxiliares
 	int escolha_principal = 1;
 	int max_clientes = 20, max_produtos = 20, max_pedidos = 20;
+	int counter_clientes = 0, counter_produtos = 0, counter_pedidos = 0;
 	float saldo_balanca = 0;
 	
 	struct clientes *cliente = (struct clientes *) calloc(max_clientes, sizeof(struct clientes));
@@ -33,17 +34,17 @@ int main() {
 			
 			// Registrar cliente
 			case 1:
-				gerenciar_clientes(cliente, &max_clientes);
+				gerenciar_clientes(cliente, &max_clientes, &counter_clientes);
 				break;
 				
 			// Realizar pedido
 			case 2:
-				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &saldo_balanca);
+				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &counter_produtos, &counter_pedidos, &saldo_balanca);
 				break;
 				
 			// Alterar estoque
 			case 3:
-				gerenciar_estoque(produto, &max_produtos);
+				gerenciar_estoque(produto, &max_produtos, &counter_produtos);
 				break;
 			
 			// Exibir o saldo da balanca	
@@ -53,7 +54,7 @@ int main() {
 				
 			// Exibir todos os pedidos realizados
 			case 5:
-				exibir_pedidos_realizados(pedido, &max_pedidos);
+				exibir_pedidos_realizados(pedido, &max_pedidos, &counter_pedidos);
 				break;
 			
 			// Finalizacao do programa

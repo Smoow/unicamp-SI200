@@ -1,6 +1,8 @@
 #ifndef _CLIENTES_H
 #define _CLIENTES_H
 
+FILE *fpclient;
+
 struct clientes
 {
     char nome[40];
@@ -10,7 +12,7 @@ struct clientes
 };
 
 // Funcoes
-void gerenciar_clientes(struct clientes *cliente, int *max_clientes);
+void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counter_clientes);
 void clearscr();
 
 

@@ -15,8 +15,7 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 	int cpf_valido = 0;
 
 	fporder = fopen("dados/ordersBIN.dat", "rb+");
-
-	if (fporder != NULL) {		// Caso existir o arquivo
+	if (fporder != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
 		fread(counter_pedidos, sizeof(int), 1, fporder);
 		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fporder);
 		fclose(fporder);
@@ -110,7 +109,7 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
         // Caso tudo esteja ok, o pedido sera registrado e o contador de pedidos sera incrementado
         (*counter_pedidos)++;
 
-        // Gravando todos os registros da memoria no arquivo
+        // Gravando todos os registros da memoria que envolvem os pedidos no arquivo ordersBIN.dat
 		fporder = fopen("dados/ordersBIN.dat", "wb");
 		if (fporder == NULL) {
 			printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
@@ -121,7 +120,7 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 			fclose(fporder);
 		}
 
-        // Gravando todos os registros da memoria no arquivo
+        // Gravando todos os registros da memoria que envolvem a balanca no arquivo balanceBIN.dat
         fpbalance = fopen("dados/balanceBIN.dat", "wb");
 	    if (fpbalance == NULL) {
 		    printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
@@ -144,8 +143,7 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 void exibir_balanca(float *saldo_balanca) {
 
 	fpbalance = fopen("dados/balanceBIN.dat", "rb+");
-
-	if (fpbalance != NULL) {		// Caso existir o arquivo
+	if (fpbalance != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
 		fread(saldo_balanca, sizeof(float), 1, fpbalance);
 		fclose(fpbalance);
 	}
@@ -163,8 +161,7 @@ void exibir_pedidos_realizados(struct pedidos *pedido, int *max_pedidos, int *co
 	int i;
 
 	fporder = fopen("dados/ordersBIN.dat", "rb+");
-
-	if (fporder != NULL) {		// Caso existir o arquivo
+	if (fporder != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
 		fread(counter_pedidos, sizeof(int), 1, fporder);
 		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fporder);
 		fclose(fporder);

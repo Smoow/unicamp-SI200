@@ -19,18 +19,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	// Variaveis relacionadas a remocao
 	char cpf_remocao[40];
 
-
 	fpclient = fopen("dados/clientsBIN.dat", "rb+");
-
-	if (fpclient != NULL) {		// Caso existir o arquivo
+	if (fpclient != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
 		fread(counter_clientes, sizeof(int), 1, fpclient);
 		fread(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
 		fclose(fpclient);
 	} else {
 		*counter_clientes = 0;
 	}
-
-
 	
 	clearscr();
     while (escolha != 0) {
@@ -100,7 +96,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 		    // Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado
 		    (*counter_clientes)++;
 
-			// Gravando todos os registros da memoria no arquivo
+			// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
 			fpclient = fopen("dados/clientsBIN.dat", "wb");
 			if (fpclient == NULL) {
 				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
@@ -140,7 +136,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				printf("Informe o novo instagram do cliente: @");
 				gets(cliente[cliente_atual].id_insta);
 				
-				// Gravando todos os registros da memoria no arquivo
+				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
 				fpclient = fopen("dados/clientsBIN.dat", "wb");
 				if (fpclient == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
@@ -189,7 +185,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				strcpy(cliente[cliente_atual].telefone, "");
 				strcpy(cliente[cliente_atual].id_insta, "");
 
-				// Gravando todos os registros da memoria no arquivo
+				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
 				fpclient = fopen("dados/clientsBIN.dat", "wb");
 				if (fpclient == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");

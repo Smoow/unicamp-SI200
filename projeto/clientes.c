@@ -18,6 +18,20 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 
 	// Variaveis relacionadas a remocao
 	char cpf_remocao[40];
+
+
+	FILE *fpclient;
+	fpclient = fopen("dados/clientsBIN.dat", "rb+");
+
+	if (fpclient != NULL) {		// Caso existir o arquivo
+		fread(&counter_clientes, sizeof(int), 1, fpclient);
+		fread(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+		fclose(fpclient);
+	} else {
+		counter_clientes = 0;
+	}
+
+
 	
 	clearscr();
     while (escolha != 0) {
@@ -87,6 +101,17 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 		    // Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado
 		    counter_clientes++;
 
+			// Gravando todos os registros da memoria no arquivo
+			fpclient = fopen("dados/clientsBIN.dat", "wb");
+			if (fpclient == NULL) {
+				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
+			} else {
+				// A primeira linha do arquivo contem o numero de registros ja gravados
+				fwrite(&counter_clientes, sizeof(int), 1, fpclient);
+				fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+				fclose(fpclient);
+			}
+
 	    	break;
 	    		
 		// Alteracao de dados dos clientes
@@ -115,7 +140,18 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 				gets(cliente[cliente_atual].telefone);
 				printf("Informe o novo instagram do cliente: @");
 				gets(cliente[cliente_atual].id_insta);
-						
+				
+				// Gravando todos os registros da memoria no arquivo
+				fpclient = fopen("dados/clientsBIN.dat", "wb");
+				if (fpclient == NULL) {
+					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
+				} else {
+					// A primeira linha do arquivo contem o numero de registros ja gravados
+					fwrite(&counter_clientes, sizeof(int), 1, fpclient);
+					fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+					fclose(fpclient);
+				}
+
 				clearscr();
 				printf("+++ Informacoes alteradas com sucesso!\n\n");
 				} else {
@@ -153,6 +189,18 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes) {
 				strcpy(cliente[cliente_atual].nome, "");
 				strcpy(cliente[cliente_atual].telefone, "");
 				strcpy(cliente[cliente_atual].id_insta, "");
+
+				// Gravando todos os registros da memoria no arquivo
+				fpclient = fopen("dados/clientsBIN.dat", "wb");
+				if (fpclient == NULL) {
+					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
+				} else {
+					// A primeira linha do arquivo contem o numero de registros ja gravados
+					fwrite(&counter_clientes, sizeof(int), 1, fpclient);
+					fwrite(cliente, sizeof(struct clientes), counter_clientes, fpclient);
+					fclose(fpclient);
+				}
+
 				counter_clientes--;
 			} else {
 				clearscr();

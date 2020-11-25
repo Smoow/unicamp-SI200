@@ -13,12 +13,13 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 	int i, j;
 	int codigo_valido = 0, codigo_produto_atual = 0;
 	int cpf_valido = 0;
+	FILE *fp;
 
-	fporder = fopen("dados/ordersBIN.dat", "rb+");
-	if (fporder != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
-		fread(counter_pedidos, sizeof(int), 1, fporder);
-		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fporder);
-		fclose(fporder);
+	fp = fopen("dados/ordersBIN.dat", "rb+");
+	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+		fread(counter_pedidos, sizeof(int), 1, fp);
+		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fp);
+		fclose(fp);
 	} else {
 		*counter_pedidos = 0;
 	}
@@ -96,38 +97,38 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
         strcpy(pedido[*counter_pedidos].nome_pedido, produto[codigo_produto_atual].nome);
         
         // Gravando todos os registros do estoque ATUALIZADO que esta na memoria PARA o arquivo
-		fpestoque = fopen("dados/estoqueBIN.dat", "wb");
-		if (fpestoque == NULL) {
+		fp = fopen("dados/estoqueBIN.dat", "wb");
+		if (fp == NULL) {
 			printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 		} else {
 			// A primeira linha do arquivo contem o numero de registros ja gravados
-			fwrite(counter_produtos, sizeof(int), 1, fpestoque);
-			fwrite(produto, sizeof(struct produtos), *counter_produtos, fpestoque);
-			fclose(fpestoque);
+			fwrite(counter_produtos, sizeof(int), 1, fp);
+			fwrite(produto, sizeof(struct produtos), *counter_produtos, fp);
+			fclose(fp);
 		}
 
         // Caso tudo esteja ok, o pedido sera registrado e o contador de pedidos sera incrementado
         (*counter_pedidos)++;
 
         // Gravando todos os registros da memoria que envolvem os pedidos no arquivo ordersBIN.dat
-		fporder = fopen("dados/ordersBIN.dat", "wb");
-		if (fporder == NULL) {
+		fp = fopen("dados/ordersBIN.dat", "wb");
+		if (fp == NULL) {
 			printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 		} else {
 			// A primeira linha do arquivo contem o numero de registros ja gravados
-			fwrite(counter_pedidos, sizeof(int), 1, fporder);
-			fwrite(pedido, sizeof(struct pedidos), *counter_pedidos, fporder);
-			fclose(fporder);
+			fwrite(counter_pedidos, sizeof(int), 1, fp);
+			fwrite(pedido, sizeof(struct pedidos), *counter_pedidos, fp);
+			fclose(fp);
 		}
 
         // Gravando todos os registros da memoria que envolvem a balanca no arquivo balanceBIN.dat
-        fpbalance = fopen("dados/balanceBIN.dat", "wb");
-	    if (fpbalance == NULL) {
+        fp = fopen("dados/balanceBIN.dat", "wb");
+	    if (fp == NULL) {
 		    printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 	    } else {
 		    // A primeira linha do arquivo contem o numero de registros ja gravados
-		    fwrite(saldo_balanca, sizeof(float), 1, fpbalance);
-		    fclose(fpbalance);
+		    fwrite(saldo_balanca, sizeof(float), 1, fp);
+		    fclose(fp);
 	    }
 
         printf("+++ Pedido realizado com sucesso! +++\n\n");
@@ -141,11 +142,13 @@ void realizar_pedido(struct clientes *cliente, struct produtos *produto, struct 
 
 // Funcao para exibir o saldo da balanca
 void exibir_balanca(float *saldo_balanca) {
+	
+	FILE *fp;
 
-	fpbalance = fopen("dados/balanceBIN.dat", "rb+");
-	if (fpbalance != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
-		fread(saldo_balanca, sizeof(float), 1, fpbalance);
-		fclose(fpbalance);
+	fp = fopen("dados/balanceBIN.dat", "rb+");
+	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+		fread(saldo_balanca, sizeof(float), 1, fp);
+		fclose(fp);
 	}
 
 	clearscr();
@@ -159,12 +162,13 @@ void exibir_balanca(float *saldo_balanca) {
 void exibir_pedidos_realizados(struct pedidos *pedido, int *max_pedidos, int *counter_pedidos) {
 	
 	int i;
+	FILE *fp;
 
-	fporder = fopen("dados/ordersBIN.dat", "rb+");
-	if (fporder != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
-		fread(counter_pedidos, sizeof(int), 1, fporder);
-		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fporder);
-		fclose(fporder);
+	fp = fopen("dados/ordersBIN.dat", "rb+");
+	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+		fread(counter_pedidos, sizeof(int), 1, fp);
+		fread(pedido, sizeof(struct pedidos), *counter_pedidos, fp);
+		fclose(fp);
 	} else {
 		*counter_pedidos = 0;
 	}

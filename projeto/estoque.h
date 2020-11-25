@@ -1,8 +1,6 @@
 #ifndef _ESTOQUE_H
 #define _ESTOQUE_H
 
-FILE *fpestoque;
-
 struct produtos
 {
     int codigo_produto;
@@ -15,7 +13,4 @@ struct produtos
 void gerenciar_estoque(struct produtos *produto, int *max_produtos, int *counter_produtos);
 void exibir_estoque(struct produtos *produto, int *max_produtos);
 
-
 #endif
-
-

@@ -19,11 +19,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	// Variaveis relacionadas a remocao
 	char cpf_remocao[40];
 
-	fpclient = fopen("dados/clientsBIN.dat", "rb+");
-	if (fpclient != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
-		fread(counter_clientes, sizeof(int), 1, fpclient);
-		fread(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
-		fclose(fpclient);
+	// Declaracao do ponteiro FILE (utilizada para leitura e escrita em arquivos)
+	FILE *fp;
+
+	fp = fopen("dados/clientsBIN.dat", "rb+");
+	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+		fread(counter_clientes, sizeof(int), 1, fp);
+		fread(cliente, sizeof(struct clientes), *counter_clientes, fp);
+		fclose(fp);
 	} else {
 		*counter_clientes = 0;
 	}
@@ -97,14 +100,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 		    (*counter_clientes)++;
 
 			// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
-			fpclient = fopen("dados/clientsBIN.dat", "wb");
-			if (fpclient == NULL) {
+			fp = fopen("dados/clientsBIN.dat", "wb");
+			if (fp == NULL) {
 				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 			} else {
 				// A primeira linha do arquivo contem o numero de registros ja gravados
-				fwrite(counter_clientes, sizeof(int), 1, fpclient);
-				fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
-				fclose(fpclient);
+				fwrite(counter_clientes, sizeof(int), 1, fp);
+				fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
+				fclose(fp);
 			}
 
 	    	break;
@@ -137,14 +140,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				gets(cliente[cliente_atual].id_insta);
 				
 				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
-				fpclient = fopen("dados/clientsBIN.dat", "wb");
-				if (fpclient == NULL) {
+				fp = fopen("dados/clientsBIN.dat", "wb");
+				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(counter_clientes, sizeof(int), 1, fpclient);
-					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
-					fclose(fpclient);
+					fwrite(counter_clientes, sizeof(int), 1, fp);
+					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
+					fclose(fp);
 				}
 
 				clearscr();
@@ -186,14 +189,14 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				strcpy(cliente[cliente_atual].id_insta, "");
 
 				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
-				fpclient = fopen("dados/clientsBIN.dat", "wb");
-				if (fpclient == NULL) {
+				fp = fopen("dados/clientsBIN.dat", "wb");
+				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(counter_clientes, sizeof(int), 1, fpclient);
-					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fpclient);
-					fclose(fpclient);
+					fwrite(counter_clientes, sizeof(int), 1, fp);
+					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
+					fclose(fp);
 				}
 
 				(*counter_clientes)--;

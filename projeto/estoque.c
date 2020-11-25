@@ -9,12 +9,15 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos, int *counter
 	// Variaveis auxiliares
 	int escolha = 0, lugar_vazio = 0, i;
 	int codigo_valido, codigo_registrar, codigo_alteracao, codigo_produto_atual, codigo_remocao, estoque_valido;
+
+	// Declaracao do ponteiro FILE (utilizada para leitura e escrita em arquivos)
+	FILE *fp;
 	
-	fpestoque = fopen("dados/estoqueBIN.dat", "rb+");
-	if (fpestoque != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
-		fread(counter_produtos, sizeof(int), 1, fpestoque);
-		fread(produto, sizeof(struct produtos), *counter_produtos, fpestoque);
-		fclose(fpestoque);
+	fp = fopen("dados/estoqueBIN.dat", "rb+");
+	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+		fread(counter_produtos, sizeof(int), 1, fp);
+		fread(produto, sizeof(struct produtos), *counter_produtos, fp);
+		fclose(fp);
 	} else {
 		*counter_produtos = 0;
 	}
@@ -87,14 +90,14 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos, int *counter
 	        (*counter_produtos)++;	
 
 			// Gravando todos os registros que envolvem o estoque da memoria no arquivo estoqueBIN.dat
-			fpestoque = fopen("dados/estoqueBIN.dat", "wb");
-			if (fpestoque == NULL) {
+			fp = fopen("dados/estoqueBIN.dat", "wb");
+			if (fp == NULL) {
 				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 			} else {
 				// A primeira linha do arquivo contem o numero de registros ja gravados
-				fwrite(counter_produtos, sizeof(int), 1, fpestoque);
-				fwrite(produto, sizeof(struct produtos), *counter_produtos, fpestoque);
-				fclose(fpestoque);
+				fwrite(counter_produtos, sizeof(int), 1, fp);
+				fwrite(produto, sizeof(struct produtos), *counter_produtos, fp);
+				fclose(fp);
 			}
 
 	    	break;
@@ -127,14 +130,14 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos, int *counter
                 scanf("%f", &produto[codigo_produto_atual].preco);
 
 				// Gravando todos os registros que envolvem o estoque da memoria no arquivo estoqueBIN.dat
-				fpestoque = fopen("dados/estoqueBIN.dat", "wb");
-				if (fpestoque == NULL) {
+				fp = fopen("dados/estoqueBIN.dat", "wb");
+				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(counter_produtos, sizeof(int), 1, fpestoque);
-					fwrite(produto, sizeof(struct produtos), *counter_produtos, fpestoque);
-					fclose(fpestoque);
+					fwrite(counter_produtos, sizeof(int), 1, fp);
+					fwrite(produto, sizeof(struct produtos), *counter_produtos, fp);
+					fclose(fp);
 				}
                 
                 clearscr();
@@ -172,14 +175,14 @@ void gerenciar_estoque(struct produtos *produto, int *max_produtos, int *counter
                 strcpy(produto[codigo_produto_atual].nome, "");
 
 				// Gravando todos os registros que envolvem o estoque da memoria no arquivo estoqueBIN.dat
-				fpestoque = fopen("dados/estoqueBIN.dat", "wb");
-				if (fpestoque == NULL) {
+				fp = fopen("dados/estoqueBIN.dat", "wb");
+				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
 					// A primeira linha do arquivo contem o numero de registros ja gravados
-					fwrite(counter_produtos, sizeof(int), 1, fpestoque);
-					fwrite(produto, sizeof(struct produtos), *counter_produtos, fpestoque);
-					fclose(fpestoque);
+					fwrite(counter_produtos, sizeof(int), 1, fp);
+					fwrite(produto, sizeof(struct produtos), *counter_produtos, fp);
+					fclose(fp);
 				}
 
                 (*counter_produtos)--;

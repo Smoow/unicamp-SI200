@@ -22,6 +22,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	// Declaracao do ponteiro FILE (utilizada para leitura e escrita em arquivos)
 	FILE *fp;
 
+	// Abertura do ponteiro FILE
 	fp = fopen("dados/clientsBIN.dat", "rb+");
 	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
 		fread(counter_clientes, sizeof(int), 1, fp);
@@ -238,7 +239,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	} 
 }
 
-// Funcao para "limpar" o terminal/tela
+// Funcao para "limpar" o terminal/cmd
 void clearscr() {
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }

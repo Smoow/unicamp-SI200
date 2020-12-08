@@ -32,7 +32,7 @@ int main() {
 	
 		switch (escolha_principal) {
 			
-			// Registrar cliente
+			// Gerenciar clientes
 			case 1:
 				gerenciar_clientes(cliente, &max_clientes, &counter_clientes);
 				break;
@@ -42,7 +42,7 @@ int main() {
 				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &counter_produtos, &counter_pedidos, &saldo_balanca);
 				break;
 				
-			// Alterar estoque
+			// Gerenciar estoque
 			case 3:
 				gerenciar_estoque(produto, &max_produtos, &counter_produtos);
 				break;

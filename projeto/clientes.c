@@ -5,26 +5,26 @@
 
 void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counter_clientes) {
 		
-	// Variaveis auxiliares
+	/* Variaveis auxiliares */
 	int i = 0, cliente_atual = 0, escolha = 1;
 
-	// Variaveis relacionadas ao registro
+	/*  Variaveis relacionadas ao registro */
 	char cpf_verificacao[20];
 	int lugar_vazio = 0;
 
-	// Variaveis relacionadas a alteracao
+	/* Variaveis relacionadas a alteracao */
 	char cpf_alteracao[40];
 	int cpf_valido = 0;
 
-	// Variaveis relacionadas a remocao
+	/* Variaveis relacionadas a remocao */
 	char cpf_remocao[40];
 
-	// Declaracao do ponteiro FILE (utilizada para leitura e escrita em arquivos)
+	/* Declaracao do ponteiro FILE (utilizada para leitura e escrita em arquivos) */
 	FILE *fp;
 
-	// Abertura do ponteiro FILE
+	/* Abertura do ponteiro FILE */ 
 	fp = fopen("dados/clientsBIN.dat", "rb+");
-	if (fp != NULL) {		// Caso existir o arquivo, realizara a leitura e colocara os dados na memoria
+	if (fp != NULL) {		/* Caso existir o arquivo, realizara a leitura e colocara os dados na memoria */
 		fread(counter_clientes, sizeof(int), 1, fp);
 		fread(cliente, sizeof(struct clientes), *counter_clientes, fp);
 		fclose(fp);
@@ -34,7 +34,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	
 	clearscr();
     while (escolha != 0) {
-	// Sub-menu para escolha do que fazer
+	/* Sub-menu para escolha do que fazer */
 	printf("+++ Gerenciamento de clientes +++\n\n");
     printf("1. Registrar cliente\n");
     printf("2. Alterar informacoes sobre clientes\n");
@@ -46,15 +46,15 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
     
 	switch (escolha) {
 	    	
-		// Registrar clientes
+		/* Registrar clientes */
 	    case 1:
 	    	clearscr();
-			// Verificacao se precisamos realocar mais memoria
+			/* Verificacao se precisamos realocar mais memoria */
 		    if (*counter_clientes == *max_clientes) {
 		        *max_clientes += 10;
 		        cliente = (struct clientes *) realloc(cliente, *max_clientes * sizeof(struct clientes));
 		
-		        // Verificacao se a realocacao de memoria foi bem sucedida
+		        /* Verificacao se a realocacao de memoria foi bem sucedida */
 		        if (!cliente) {
 		            printf("\nMemoria insuficiente!\n\n");
 		            return;
@@ -63,10 +63,10 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 			
 			printf("\n+++ Registrar Cliente +++\n\n");
 		    printf("Informe o CPF: ");
-		    gets(cpf_verificacao); // Limpar o buffer - eh um "dumb gets" - tera mais desses ao longo do codigo
+		    gets(cpf_verificacao); /* Limpar o buffer - eh um "dumb gets" - tera mais desses ao longo do codigo */
 		    gets(cpf_verificacao);
 		    
-		    // Verificar se o CPF ja esta cadastrado
+		    /* Verificar se o CPF ja esta cadastrado */
 		    for (i = 0; i < *max_clientes; i++) {
 		    	if (strcmp(cliente[i].cpf, cpf_verificacao) == 0) {
 		    		clearscr();
@@ -75,18 +75,18 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				}	
 			}
 			
-			// Encontrar algum lugar da struct cliente que esteja vazio
+			/* Encontrar algum lugar da struct cliente que esteja vazio */
 			for (i = 0; i < *max_clientes; i++) {
 				if (strcmp(cliente[i].cpf, "") == 0) {
-					lugar_vazio = i;	// A variavel "lugar_vazio" servira de identificacao para registrarmos os dados, visto que
-					break;				// ao remover um cliente, iremos reutilizar o espaco que foi disponibilzado.
+					lugar_vazio = i;	/* A variavel "lugar_vazio" servira de identificacao para registrarmos os dados, visto que */
+					break;				/* ao remover um cliente, iremos reutilizar o espaco que foi disponibilzado. */
 				}
 			}
 			
-			// Copiando o CPF informado (ja que nao existe na base de dados) para um slot vazio
+			/* Copiando o CPF informado (ja que nao existe na base de dados) para um slot vazio */
 			strcpy(cliente[lugar_vazio].cpf, cpf_verificacao);
 			
-			// Continuacao do registro
+			/* Continuacao do registro */
 			printf("Informe o nome: ");
 		    gets(cliente[lugar_vazio].nome);
 		    printf("Informe o telefone: ");
@@ -97,15 +97,15 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 			clearscr();
 		    printf("\n+++ Cliente registrado com sucesso! +++\n\n");
 		
-		    // Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado
+		    /* Caso tudo esteja ok, o cliente sera registrado e o contador de clientes sera incrementado */
 		    (*counter_clientes)++;
 
-			// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
+			/* Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat */
 			fp = fopen("dados/clientsBIN.dat", "wb");
 			if (fp == NULL) {
 				printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 			} else {
-				// A primeira linha do arquivo contem o numero de registros ja gravados
+				/* A primeira linha do arquivo contem o numero de registros ja gravados */
 				fwrite(counter_clientes, sizeof(int), 1, fp);
 				fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
 				fclose(fp);
@@ -113,25 +113,25 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 
 	    	break;
 	    		
-		// Alteracao de dados dos clientes
+		/* Alteracao de dados dos clientes */
 	    case 2:				
 	    	clearscr();
 			cpf_valido = 0;
 			   		
 			printf("\nInforme o CPF do cliente que deseja alterar as informacoes: ");
-			gets(cpf_alteracao); // Dumb gets
+			gets(cpf_alteracao); /* Dumb gets */
 			gets(cpf_alteracao);
 					
-			// Procura do CPF informado no registro de clientes
+			/* Procura do CPF informado no registro de clientes */
 			for (i = 0; i < *max_clientes; i++) {
 				if (strcmp(cpf_alteracao, cliente[i].cpf) == 0){
-					cpf_valido = 1;		// Vale lembrar que "cliente_atual" tem o mesmo "significado" que "lugar_vazio"
-					cliente_atual = i;	// Eh um metodo de encontrarmos e segurarmos a posicao que estamos tratando
+					cpf_valido = 1;		/* Vale lembrar que "cliente_atual" tem o mesmo "significado" que "lugar_vazio" */
+					cliente_atual = i;	/* Eh um metodo de encontrarmos e segurarmos a posicao que estamos tratando*/
 					break;
 				}
 			}
 					
-			// Se o CPF for valido, ou seja, existir
+			/* Se o CPF for valido, ou seja, existir */
 			if (cpf_valido) {
 				printf("Informe o novo nome do cliente: ");
 				gets(cliente[cliente_atual].nome);
@@ -140,12 +140,12 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				printf("Informe o novo instagram do cliente: @");
 				gets(cliente[cliente_atual].id_insta);
 				
-				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
+				/* Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat */
 				fp = fopen("dados/clientsBIN.dat", "wb");
 				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
-					// A primeira linha do arquivo contem o numero de registros ja gravados
+					/* A primeira linha do arquivo contem o numero de registros ja gravados */
 					fwrite(counter_clientes, sizeof(int), 1, fp);
 					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
 					fclose(fp);
@@ -161,16 +161,16 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 
 	    	break;
 	    		
-		// Excluir clientes
+		/* Excluir clientes */
 	    case 3:
 	    	clearscr();
 			cpf_valido = 0;
 				
 			printf("\nInforme o CPF do cliente que deseja remover: ");
-			gets(cpf_remocao); // Dumb gets
+			gets(cpf_remocao); /* Dumb gets */
 			gets(cpf_remocao);
 					
-			// Procura do codigo informado no registro de produtos
+			/* Procura do codigo informado no registro de produtos */
 			for (i = 0; i < *max_clientes; i++) {
 				if (strcmp(cpf_remocao, cliente[i].cpf) == 0){
 					cpf_valido = 1;
@@ -179,7 +179,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				}
 			}
 					
-			// Fazer a posicao que o cliente removido estava receber dados que informam que a posicao agora esta vazia
+			/* Fazer a posicao que o cliente removido estava receber dados que informam que a posicao agora esta vazia */
 			if (cpf_valido) {
 				clearscr();
 				printf("\n+++ Cliente removido com sucesso! +++\n");
@@ -189,12 +189,12 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 				strcpy(cliente[cliente_atual].telefone, "");
 				strcpy(cliente[cliente_atual].id_insta, "");
 
-				// Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat
+				/* Gravando todos os registros que envolvem o cliente da memoria no arquivo clientsBIN.dat */
 				fp = fopen("dados/clientsBIN.dat", "wb");
 				if (fp == NULL) {
 					printf("\nErro na criacao do arquivo. Nao foi possivel gravar os registros.\n");
 				} else {
-					// A primeira linha do arquivo contem o numero de registros ja gravados
+					/* A primeira linha do arquivo contem o numero de registros ja gravados */
 					fwrite(counter_clientes, sizeof(int), 1, fp);
 					fwrite(cliente, sizeof(struct clientes), *counter_clientes, fp);
 					fclose(fp);
@@ -208,12 +208,12 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 
 	    	break;
 	
-		// Exibir todos os clientes registrados
+		/* Exibir todos os clientes registrados */
 	    case 4:
 			clearscr();
 			printf("\n +++ Clientes registrados +++\n\n");
 			for (i = 0; i < *max_clientes; i++) {
-				// Verificacao para nao mostrar os campos em que possuem CPF vazios (nulos), ou seja, deletados ou ainda nao utilizados
+				/* Verificacao para nao mostrar os campos em que possuem CPF vazios (nulos), ou seja, deletados ou ainda nao utilizados */
 				if (strcmp(cliente[i].cpf, "") != 0) {
 					printf("Nome: %s\n", cliente[i].nome);
 					printf("CPF: %s\n", cliente[i].cpf);
@@ -225,12 +225,12 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 
 	    	break;
 	    		
-		// Sair do sub-menu
+		/* Sair do sub-menu */
 	    case 0:
 	    	clearscr();
 	    	break;
 	    		
-		// Tratamento de entrada invalida
+		/* Tratamento de entrada invalida */
 	    default:
 	    	clearscr();
 	    	printf("Opcao invalida\n\n");
@@ -239,7 +239,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 	} 
 }
 
-// Funcao para "limpar" o terminal/cmd
+/* Funcao para "limpar" o terminal/cmd */
 void clearscr() {
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }

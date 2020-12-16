@@ -21,8 +21,8 @@ int main() {
 		// Menu principal
 		printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
 	    printf("1. Gerenciar clientes                   \n");
-	    printf("2. Realizar pedido                      \n");
-	    printf("3. Gerenciar estoque                    \n");
+	    printf("2. Gerenciar estoque                    \n");
+	    printf("3. Realizar pedido                      \n");
 	    printf("4. Exibir saldo da balanca              \n");
 	    printf("5. Exibir todos os pedidos registrados  \n");
 	    printf("0. Sair\n\n");
@@ -36,15 +36,15 @@ int main() {
 			case 1:
 				gerenciar_clientes(cliente, &max_clientes, &counter_clientes);
 				break;
-				
-			// Realizar pedido
+			
+			// Gerenciar estoque
 			case 2:
-				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &counter_produtos, &counter_pedidos, &saldo_balanca);
+				gerenciar_estoque(produto, &max_produtos, &counter_produtos);
 				break;
 				
-			// Gerenciar estoque
+			// Realizar pedido
 			case 3:
-				gerenciar_estoque(produto, &max_produtos, &counter_produtos);
+				realizar_pedido(cliente, produto, pedido, &max_pedidos, &max_produtos, &counter_produtos, &counter_pedidos, &saldo_balanca);
 				break;
 			
 			// Exibir o saldo da balanca	
@@ -59,6 +59,9 @@ int main() {
 			
 			// Finalizacao do programa
 			case 0:
+				free(cliente);
+				free(produto);
+				free(pedido);
 				printf("\nFinalizado com sucesso.\n");
 				break;
 			

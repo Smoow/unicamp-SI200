@@ -126,7 +126,7 @@ void gerenciar_clientes(struct clientes *cliente, int *max_clientes, int *counte
 			for (i = 0; i < *max_clientes; i++) {
 				if (strcmp(cpf_alteracao, cliente[i].cpf) == 0){
 					cpf_valido = 1;		/* Vale lembrar que "cliente_atual" tem o mesmo "significado" que "lugar_vazio" */
-					cliente_atual = i;	/* Eh um metodo de encontrarmos e segurarmos a posicao que estamos tratando*/
+					cliente_atual = i;	/* Eh um metodo de encontrarmos e segurarmos a posicao que estamos tratando */
 					break;
 				}
 			}

@@ -20,14 +20,14 @@ int main() {
 		
 		// Menu principal
 		printf("\n+++ Bem-vindo ao menu principal! +++\n\n");
-	    printf("1. Gerenciar clientes                   \n");
-	    printf("2. Gerenciar estoque                    \n");
-	    printf("3. Realizar pedido                      \n");
-	    printf("4. Exibir saldo da balanca              \n");
-	    printf("5. Exibir todos os pedidos registrados  \n");
-	    printf("0. Sair\n\n");
-	    printf("Sua escolha: ");
-	    scanf("%d", &escolha_principal);
+		printf("1. Gerenciar clientes                   \n");
+	    	printf("2. Gerenciar estoque                    \n");
+	    	printf("3. Realizar pedido                      \n");
+	    	printf("4. Exibir saldo da balanca              \n");
+	    	printf("5. Exibir todos os pedidos registrados  \n");
+	    	printf("0. Sair\n\n");
+	    	printf("Sua escolha: ");
+	    	scanf("%d", &escolha_principal);
 	
 	
 		switch (escolha_principal) {
